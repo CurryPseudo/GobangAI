@@ -1,3 +1,5 @@
 .stack-work/
 GobangAI.cabal
 *~
+specTemplate
+.vscode/

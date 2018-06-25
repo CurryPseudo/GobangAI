@@ -28,6 +28,8 @@ spec = do
             stateTrans 2 0 14232 `shouldBe` 13208
             stateTrans 1 3 323 `shouldBe` 12611
     describe "stateScore" $ do
-        it "return a score from a state" $ do
-            stateScore (fromChesses [0,1,1,1,1,0,2,2]) `shouldBe` 194
-            stateScore (fromChesses [0,2,2,2,0,0,2,2]) `shouldBe` -86
+        it "return a score from a state and a chess center of state" $ do
+            stateScore (fromChesses [0,1,1,1,1,0,2,2]) 1 `shouldBe` 994 
+            stateScore (fromChesses [0,1,1,1,1,0,2,2]) 2 `shouldBe` 34
+            stateScore (fromChesses [0,2,2,2,0,0,2,2]) 1 `shouldBe` -46
+            stateScore (fromChesses [0,2,2,2,0,0,2,2]) 2 `shouldBe` -206

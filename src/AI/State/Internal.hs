@@ -1,4 +1,4 @@
-module AI.State.Interal where
+module AI.State.Internal where
 
 import Debug.Trace
 import Text.Printf
@@ -43,28 +43,31 @@ stateTrans pos c state = let
     debugFunc = trace (printf "divValue = %d, lc = %d, diff = %d" divValue lc diff)
     in state + diff * divValue
 
-stateScores :: [Int]
-stateScores = flip map stateSequence $ 
-    chessesJudge . fromState
+stateScores :: [[Int]]
+stateScores = flip map stateSequence $ \s ->
+    map (placeCenterScore (fromState s)) [ally, enemy]
 
-stateScoresArray :: Array Int Int
+placeCenterScore :: [Chess] -> Chess -> Int
+placeCenterScore cs c = let
+    half = length cs `quot` 2
+    (left, right) = splitAt half cs
+    nc = left ++ [c] ++ right
+    (ps, s) = chessesJudge nc
+    in s
+
+
+stateScoresArray :: Array Int [Int]
 stateScoresArray = listArray (minState, maxState) $! stateScores
+
+chessToScore :: [Int] -> Chess -> Int
+chessToScore ss c = ss !! (c - 1)
 
 prepareStateScores :: IO ()
 prepareStateScores = do 
     return $! stateScoresArray
     return ()
 
-stateScore :: Int -> Int
-stateScore = (!) stateScoresArray  
 
-findScore :: Int -> Maybe Int
-findScore score = let
-    getTuple i = (i, stateScore i) 
-    tuples = map getTuple stateSequence
-    in do 
-        (i_, s_) <- find (\(i, s) -> s == score) tuples
-        return i_
+stateScore :: Int -> Chess -> Int
+stateScore state = chessToScore (stateScoresArray ! state) 
 
-scores :: S.Set Int
-scores = S.fromList $ map stateScore stateSequence

@@ -6,5 +6,5 @@ module AI.State
     , stateScore
     ) where
 
-import AI.State.Interal
+import AI.State.Internal
 import Gobang

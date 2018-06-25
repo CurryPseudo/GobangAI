@@ -1,5 +1,5 @@
 module AI.Pattern
     ( chessesJudge
     ) where
-import AI.Pattern.Interal
+import AI.Pattern.Internal
 
