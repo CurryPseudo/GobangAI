@@ -7,7 +7,7 @@ import Test.Hspec
 import AI.Pattern
 import Gobang
 
-sr :: (Num a) => String -> ([[Int]], a)
+sr :: String -> ([[Int]], Int)
 sr s = chessesJudge (map digitToInt s)
 
 chessesJudgePatternsTest :: String -> [String]
@@ -26,18 +26,19 @@ spec :: Spec
 spec = do 
     describe "chessesJudge" $ do
         it "return match patterns from a chess sequence" $ do
-          chessesJudgePatternsTest "011201" `shouldBe` ["011", "01"]
+          chessesJudgePatternsTest "011201" `shouldBe` ["011"]
           chessesJudgePatternsTest "011121110" `shouldBe` ["0111", "1110"]
-          chessesJudgePatternsTest "0112201010" `shouldBe` ["011", "220", "01010"] 
+          chessesJudgePatternsTest "0112201010" `shouldBe` ["011", "01010", "220"] 
           chessesJudgePatternsTest "111" `shouldBe` [] 
-          chessesJudgePatternsTest "01101020230" `shouldBe` ["011010"] 
+          chessesJudgePatternsTest "01101020230" `shouldBe` ["011010", "0202"] 
           chessesJudgePatternsTest "" `shouldBe` []
-          chessesJudgePatternsTest "011111" `shouldBe` ["11111"]
-          chessesJudgePatternsTest "011011" `shouldBe` ["0110", "11011", "011"]
+          chessesJudgePatternsTest "011111" `shouldBe` ["011111"]
+          chessesJudgePatternsTest "011011" `shouldBe` ["011011"]
           chessesJudgePatternsTest "01101" `shouldBe` ["01101"]
           chessesJudgePatternsTest "011010110" `shouldBe` ["011010", "0110"]
-          chessesJudgePatternsTest "01101110110" `shouldBe` ["11011", "0110"]
+          chessesJudgePatternsTest "01101110110" `shouldBe` ["011011", "10110"]
           chessesJudgePatternsTest "011011110220" `shouldBe` ["0110", "011110", "0220"]
+          chessesJudgePatternsTest "00111" `shouldBe` ["0111"]
         it "return a compareable num from a chess sequence" $ do
           chessesJudgeScoresComp "01101" "011011" `shouldBe` LT
           chessesJudgeScoresComp "011010110" "01101110110" `shouldBe` LT

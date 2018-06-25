@@ -13,19 +13,39 @@ import qualified Text.Printf as T
 type Pattern = Int 
 
 data PatternMatchTree a =  Node {patternsMatch :: PatternScore a, emptyNode :: PatternMatchTree a, allyNode :: PatternMatchTree a} 
-                       | MissMatch 
+                       | MissMatch deriving (Show, Eq)
 
-newtype PatternScore a = PatternScore ([Pattern], a)
+newtype PatternScore a = PatternScore ([Pattern], a) deriving (Show, Eq)
 
-instance Functor PatternScore where
-    fmap f (PatternScore (ps, s)) = PatternScore (ps, f s)
-
-nonePatternScore :: (Num a) => PatternScore a
+nonePatternScore :: (Ord a, Num a) => PatternScore a
 nonePatternScore = PatternScore ([], 0)
 
 psTuple :: PatternScore a -> ([Pattern], a)
 psTuple (PatternScore tuple) = tuple
 
+psPatterns :: PatternScore a -> [Pattern]
+psPatterns = fst . psTuple
+
+presentTree = let
+    emptyNode = MissMatch
+    allyNode = Node undefined MissMatch MissMatch
+    in Node undefined emptyNode allyNode
+    
+present :: (PatternMatchTree a -> PatternMatchTree a) -> Int
+present f = let
+    n = f presentTree
+    check MissMatch = 0
+    check _ = 1
+    in check n
+
+psScore :: PatternScore a -> a
+psScore = snd . psTuple
+
+mapPatterns :: ([Pattern] -> [Pattern]) -> PatternScore a -> PatternScore a
+mapPatterns f (PatternScore (ps, s)) = PatternScore (f ps, s)
+
+mapScore :: (a -> a) -> PatternScore a -> PatternScore a
+mapScore f (PatternScore (ps, s)) = PatternScore (ps, f s)
 score :: PatternScore a -> a
 score (PatternScore (_, s)) = s
 
@@ -45,12 +65,16 @@ fromString :: String -> Maybe [Pattern]
 fromString "" = Nothing
 fromString s = mapM fromChar s
 
-chessesJudge :: (Num a) => [Chess] -> ([[Int]], a)
+chessesJudge :: [Chess] -> ([[Int]], Int)
 chessesJudge cs = let
-    (thisPs, thisS) = foldPS $ chessesJudgeSingle cs
-    (unswapSwapPs, unswapSwapS) = foldPS $ chessesJudgeSingle (map swapC cs)
-    (swapPs, swapS) = (map (map swapC) swapPs, -swapS)
-    in (thisPs ++ swapPs, thisS + swapS)
+    forward = chessesJudgeSingle cs
+    backward = swapChessesJudgeSingle cs
+    in foldPS $ forward ++ backward
+
+swapChessesJudgeSingle :: (Num a, Ord a, Eq a) => [Chess] -> [PatternScore a]
+swapChessesJudgeSingle cs = let
+    ps = chessesJudgeSingle (map swapC cs)
+    in map (mapScore negate . mapPatterns (map swapC)) ps
 
 swapC :: Chess -> Chess
 swapC 1 = 2
@@ -61,30 +85,52 @@ foldPS :: (Num a) => [PatternScore a] -> ([[Int]], a)
 foldPS pss = foldr step ([], 0) pss where
     step (PatternScore (ops, os)) (ps, s) = (ops:ps, s + os)
 
-chessesJudgeSingle :: (Num a) => [Chess] -> [PatternScore a]
+chessesJudgeSingle :: (Num a, Ord a, Eq a) => [Chess] -> [PatternScore a]
 chessesJudgeSingle cs = let 
     css = splitChesses cs
-    in concatMap chessesJudgeWithoutSplit css
+    in filter ((/= 0) . psScore) $concatMap chessesJudgeWithoutSplit css
 
-chessesJudgeWithoutSplit :: (Num a) => [Chess] -> [PatternScore a]
-chessesJudgeWithoutSplit = undefined
---chessesJudgeWithoutSplit cs = fst $ fromJust $ find (null . snd) $ iterate iterMatch (nonePatternScore, cs) 
+chessesJudgeWithoutSplit :: (Num a, Ord a, Eq a) => [Chess] -> [PatternScore a]
+chessesJudgeWithoutSplit [] = []
+chessesJudgeWithoutSplit cs = let
+    f (pureP, pureS) = pureP:chessesJudgeWithoutSplit pureS
+    rs = map f $ purePsPureSs cs
+    in if null rs
+       then []
+       else maximumBy (comparing (sum . map psScore)) rs
 
-iterMatch :: (Num a) => (PatternScore a, [Chess]) -> (PatternScore a, [Chess])
-iterMatch = undefined
---iterMatch PatternScore (scoreSum, cs) = let
---    (nScoreSum, ncs) = match cs
---    in (scoreSum + nScoreSum, ncs)
+purePsPureSs :: (Num a, Ord a, Eq a) => [Chess] -> [(PatternScore a, [Chess])]
+purePsPureSs [] = []
+purePsPureSs cs = let
+    prefs = matchPrefix cs
+    prefPs = map psPatterns prefs
+    suffs = map (`removePrefixByEndZero` cs) prefPs
+    in filter ((/= length cs) . length . snd) $ flip concatMap (zip prefs suffs) $ \(p, s) ->
+        flip map s $ \s_ -> (p, s_)
+
+removePrefixByEndZero :: [Pattern] -> [Pattern] -> [[Pattern]]
+removePrefixByEndZero [] ps = [ps]
+removePrefixByEndZero [0] ps = [ps, tail ps]
+removePrefixByEndZero (prefP:prefPs) (p:ps) = removePrefixByEndZero prefPs ps
 
 
 
 
-patternStrs :: (Num a) => [(String, a)]
+
+
+patternStrs :: (Num a, Eq a, Ord a) => [(String, a)]
 patternStrs = 
     [ ("11111" , 1000)
+    , ("011111" , 1000)
+    , ("0111110" , 1000)
     , ("011110", 200)
     , ("01111" , 100)
+    , ("010111" , 100)
+    , ("011011" , 100)
+    , ("011101" , 100)
+    , ("0101110" , 100)
     , ("10111" , 100)
+    , ("0110110" , 100)
     , ("11011" , 100)
     , ("01110" , 80) 
     , ("011010", 70)
@@ -96,7 +142,7 @@ patternStrs =
     , ("011"   , 6)
     , ("0101"  , 5)
     ]
-patternCases :: (Num a) => [PatternScore a]
+patternCases :: (Num a, Eq a, Ord a) => [PatternScore a]
 patternCases = makeSymmetric $ flip map patternStrs $ \(p, s) -> PatternScore (fromJust (fromString p), s)
 
 makeSymmetric :: [PatternScore a] -> [PatternScore a]
@@ -129,16 +175,29 @@ maxScore ns = maximumBy (comparing (snd . psTuple)) ns
 createTree :: (Ord a, Num a) => [PatternScore a] -> PatternMatchTree a
 createTree [] = MissMatch
 createTree pss = let
-    (emptys, others) = partition firstEmpty pss
-    (nones, allys) = partition isNone others
-    firstEmpty (PatternScore (ps, s)) = ps /= [] && head ps == 0
-    isNone (PatternScore ([], s)) = True
-    isNone (PatternScore (_, s)) = False
-    maxNone = maxScore nones
-    tailPs (PatternScore (ps, s)) = PatternScore (tail ps, s) 
-    cts = createTree . map tailPs
-    in Node maxNone (cts emptys) (cts allys)
+    emptySub = subTree emptyNode
+    allySub = subTree allyNode
+    subTree f = append (present f) $ createTree (cutHead (belongs f))
+    (emptyPs, otherPs) = partition (null . psPatterns) pss
+    belongs f = flip filter otherPs $ \(PatternScore (ps, _)) -> 
+        fromInteger (fromIntegral (head ps))  == present f
+    cutHead = map (mapPatterns tail)
+    append p MissMatch = MissMatch
+    append p (Node (PatternScore (ps, s)) emn aln) = 
+        Node (PatternScore (p:ps, s)) (append p emn) (append p aln)
+    currentPs = fromMaybe nonePatternScore $ listToMaybe emptyPs
+    in Node currentPs emptySub allySub
     
+mapPMT :: (PatternScore a -> PatternScore a) -> PatternMatchTree a -> PatternMatchTree a
+mapPMT _ MissMatch = MissMatch
+mapPMT f (Node ps emptySub allySub) = Node (f ps) (mapPMT f emptySub) (mapPMT f allySub)
+
+getAllPs :: PatternMatchTree a -> [PatternScore a]
+getAllPs MissMatch = []
+getAllPs (Node ps emptySub allySub) = [ps] ++ getAllPs emptySub ++ getAllPs allySub
+
+
+matchTreeCase :: (Num a, Ord a, Eq a) => PatternMatchTree a
 matchTreeCase = createTree patternCases 
 
 maxBy :: (a -> a -> Ordering) -> a -> a -> a
@@ -146,17 +205,23 @@ maxBy com x y = if com x y == LT
                 then y
                 else x
 
-matchByTree :: (Num a, Ord a) => PatternMatchTree a -> [Chess] -> (PatternScore a, [Chess])
-matchByTree MissMatch cs = (nonePatternScore, cs)
-matchByTree node [] = (patternsMatch node, [])
-matchByTree node (c:cs) = let
-    thisR = (patternsMatch node, c:cs)
-    ms f = let 
-        r = matchByTree (f node) cs
-        in maxBy (comparing (snd . psTuple . fst)) r thisR 
-    in if c == 0
-       then ms emptyNode
-       else ms allyNode
+matchPrefixByTree :: PatternMatchTree a -> [Chess] -> [PatternScore a]
+matchPrefixByTree MissMatch _ = []
+matchPrefixByTree (Node ps _ _) [] = [ps]
+matchPrefixByTree (Node ps eSub aSub) (c:cs) = let
+    sub = if c == 0
+          then eSub
+          else aSub
+    subR = matchPrefixByTree sub cs
+    in ps:subR
 
-match = matchByTree matchTreeCase
+scoreZero :: (Num a, Eq a) => PatternScore a -> Bool
+scoreZero ps = psScore ps == 0
+
+
+
+
+matchPrefix :: (Num a, Ord a, Eq a) => [Chess] -> [PatternScore a]
+--matchPrefix c = filter (not . scoreZero) $ matchPrefixByTree matchTreeCase c
+matchPrefix c = matchPrefixByTree matchTreeCase c
 
