@@ -2,4 +2,5 @@
 GobangAI.cabal
 *~
 specTemplate
+*.py
 .vscode/

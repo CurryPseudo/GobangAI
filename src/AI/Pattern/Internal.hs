@@ -17,6 +17,7 @@ data PatternMatchTree a =  Node {patternsMatch :: PatternScore a, emptyNode :: P
 
 newtype PatternScore a = PatternScore ([Pattern], a) deriving (Show, Eq)
 
+
 nonePatternScore :: (Ord a, Num a) => PatternScore a
 nonePatternScore = PatternScore ([], 0)
 
