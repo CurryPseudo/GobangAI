@@ -23,7 +23,7 @@ chessesJudgeScoresComp s1 s2 = let
 
 
 spec :: Spec
-spec = do 
+spec =  
     describe "chessesJudge" $ do
         it "return match patterns from a chess sequence" $ do
           chessesJudgePatternsTest "011201" `shouldBe` ["011"]

@@ -3,6 +3,8 @@ module Board ( putElem
              , toLists
              , emptyBoard
              , listBoard
+             , Board ()
+             , PosElem ()
 )where
 
 import Board.Internal
