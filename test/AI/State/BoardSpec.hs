@@ -11,7 +11,7 @@ spec :: Spec
 spec = 
     describe "fromBoard" $
         it "should return a board state and score from a board" $ do
-            let sb = getScore  . fromBoard . fromJust
+            let sb = score . fromBoard . fromJust
             let
                 b1 = listBoard [ [0, 0, 0, 0, 0]
                                , [0, 1, 1, 0, 0]

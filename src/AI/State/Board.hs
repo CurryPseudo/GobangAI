@@ -2,8 +2,8 @@ module AI.State.Board ( BoardState()
                       , empty
                       , fromBoard
                       , update
-                      , getScore
-                      , getState
+                      , score
+                      , states
 ) where
 
 import AI.State.Board.Internal

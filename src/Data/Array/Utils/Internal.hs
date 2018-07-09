@@ -12,6 +12,11 @@ getIndexes w h = let
     ys = concatMap (replicate w) [0..(h-1)]
     in zip xs ys
 
+getSize :: Array (Int, Int) a -> (Int, Int)
+getSize a = let
+    (_, (w', h')) = bounds a
+    in (w' + 1, h' + 1)
+
 mapArray :: Array (Int, Int) a -> ((Int, Int) -> a -> a) -> Array (Int, Int) a
 mapArray a f = let
     is = indices a
