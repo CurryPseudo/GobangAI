@@ -1,30 +1,42 @@
-{-# LANGUAGE ExistentialQuantification #-}
 module AI.State.Board.Internal where
 
 import Control.Monad
+
 
 import qualified Data.Map.Strict as M
 import Data.Array
 
 import Data.Array.Utils
+import Data.Maybe
 import Board
 import AI.State
 
-data BoardState = BS {score :: Int, states :: ArrayState} deriving (Eq)
-type ArrayState = Array (Int, Int) DirStates
+data BoardState = BS {score :: Int, states :: ArrayState} deriving (Eq, Show)
+type ArrayState = Array (Int, Int) DirStates 
 data Dir = Horizontal | Vertical | MainDiag | Diag deriving (Show, Eq, Ord)
-type DirStates = (Int, M.Map Dir Int)
+type DirStates = (Int, M.Map Dir State)
 type Pos = (Int, Int)
 type Size = (Int, Int)
 
 empty :: Int -> Int -> BoardState
-empty w h = BS 0 (genTableArray w h $ const undefined)
+empty w h = BS 0 (genTableArray w h $ buildDirStates (emptyBoard w h))
+
+buildDirStates :: Board -> Pos -> DirStates
+buildDirStates b pos = let
+    dirState dir = fromChesses $ map (getElem b) $ dirSeq pos dir
+    insertDir (d, vec) = M.insert d (dirState vec)
+    rMap = foldr insertDir M.empty dirVecs
+    re = getElem b pos
+    in (re, rMap)
 
 fromBoard :: Board -> BoardState
-fromBoard b = undefined
+fromBoard b = let
+    updatePos pos bs = update bs (pos, getElem b pos)
+    size = getSize b
+    in foldr updatePos (uncurry empty size) $ uncurry getIndexes size
 
 update :: BoardState -> PosElem -> BoardState
-update (BS sc sts) pe@(p, e) = let
+update bs@(BS sc sts) pe@(p, e) = let
     (ce, baseDirStates) = sts ! p 
     deltaStateScore state = stateScore state e - stateScore state ce
     deltaScores = map deltaStateScore (M.elems baseDirStates) 
@@ -48,19 +60,15 @@ udtedStatesPosesUnFilter p = flip concatMap dirVecs $ \(_, d) ->
 
 udtStatesBase :: Pos -> PosElem -> ArrayState -> ArrayState
 udtStatesBase pos (bp, be) as = let
-    Just (dir, statePos) = rltvDirPos bp pos
+    Just (dir, statePos) = rltvDirPos pos bp
+    fds :: M.Map Dir State -> M.Map Dir State
     fds = M.adjust (stateTrans statePos be) dir
-    in udtStatesPos pos (mapSnd fds) as
+    ds :: DirStates
+    ds = as ! pos
+    in as // [(pos, mapSnd fds ds)]
 
 mapSnd :: (b -> b) -> (a, b) -> (a, b)
 mapSnd f (x, y) = (x, f y)
-
-
-udtStatesPos :: Pos -> (DirStates -> DirStates) -> ArrayState -> ArrayState
-udtStatesPos p f as = let
-    ds = as ! p
-    nds = f ds
-    in as // [(p, nds)]
 
 doPos2 :: (Int -> Int -> Int) -> Pos -> Pos -> Pos
 doPos2 f (x1, y1) (x2, y2) = (f x1 x2, f y1 y2)
@@ -83,12 +91,18 @@ rltvDirPos (bx, by) (x, y) = let
         return (dir, pos)
 
 dirVecs :: [(Dir, (Int, Int))]
-dirVecs = [(Horizontal, (1, 0)), (Vertical, (0, 1)), (MainDiag, (1, 1)), (Diag, (1, -1))]
+dirVecs = [ (Horizontal, (1, 0))
+          , (Vertical, (0, 1))
+          , (MainDiag, (1, 1))
+          , (Diag, (1, -1))
+          ]
 
 vecLen :: (Int, Int) -> (Int, Int) -> Maybe Int
 vecLen (0, 0) _ = Nothing
 vecLen (dx, dy) (rx, ry) = if dx * ry == dy * rx
-                           then Just ((dx + dy) `quot` (rx + ry))
+                           then if rx /= 0
+                                then Just $ dx `quot` rx
+                                else Just $ dy `quot` ry
                            else Nothing
 
 stateSeq = [-4, -3, -2, -1, 1, 2, 3, 4]

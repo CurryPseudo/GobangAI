@@ -5,6 +5,7 @@ module Board ( putElem
              , listBoard
              , Board ()
              , PosElem ()
+             , getElem
 )where
 
 import Board.Internal

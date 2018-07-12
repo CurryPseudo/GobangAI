@@ -4,6 +4,7 @@ import Data.Array
 import Data.Either
 import Data.Maybe
 import Data.Array.Utils
+import Debug.Trace
 
 type Board = Array (Int, Int) Int
 
@@ -22,6 +23,11 @@ putElems a (pe:pes) = do
 
 emptyBoard :: Int -> Int -> Board
 emptyBoard w h = genTableArray w h (const 0) 
+
+getElem :: Board -> (Int , Int) -> Int
+getElem b pos = if inIndexRange b pos
+                then b ! pos
+                else 3
 
 listBoard :: [[Int]] -> Maybe Board
 listBoard ls = let

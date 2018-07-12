@@ -10,20 +10,28 @@ import qualified Data.Set as S
 import AI.Pattern
 import Gobang
 
-fromChesses_ :: [Chess] -> Int
-fromChesses_ [] = 0
-fromChesses_ (c:cs) = 4 * fromChesses_ cs + c
+newtype State = St Int deriving(Eq)
 
-fromState_ :: Int -> Int -> [Chess]
+toInt :: State -> Int
+toInt (St x) = x
+
+instance Show State where
+    show s = show (fromState s)
+
+fromChesses_ :: [Chess] -> State
+fromChesses_ [] = St 0
+fromChesses_ (c:cs) = St $ 4 * toInt (fromChesses_ cs) + c
+
+fromState_ :: Int -> State -> [Chess]
 fromState_ 0 _ = []
 fromState_ len state = let
-    (ns, c) = state `divMod` 4
-    in c : fromState_ (len - 1) ns
+    (ns, c) = toInt state `divMod` 4
+    in c : fromState_ (len - 1) (St ns)
 
-fromChesses :: [Chess] -> Int
+fromChesses :: [Chess] -> State
 fromChesses cs = fromChesses_ (reverse cs)  
 
-fromState :: Int -> [Chess]
+fromState :: State -> [Chess]
 fromState state = reverse $ fromState_ 8 state
 
 maxState :: Int
@@ -35,17 +43,16 @@ minState = 0
 stateSequence :: [Int]
 stateSequence = [minState..maxState]
 
-stateTrans :: Int -> Chess -> Int -> Int
+stateTrans :: Int -> Chess -> State -> State
 stateTrans pos c state = let
     divValue = (4 ^ (7 - pos))
-    lc = mod (div state divValue) 4
+    lc = mod (div (toInt state) divValue) 4
     diff = c - lc
-    debugFunc = trace (printf "divValue = %d, lc = %d, diff = %d" divValue lc diff)
-    in state + diff * divValue
+    in St $ toInt state + diff * divValue
 
 stateScores :: [[Int]]
 stateScores = flip map stateSequence $ \s ->
-    map (placeCenterScore (fromState s)) [ally, enemy]
+    map (placeCenterScore (fromState (St s))) [none, ally, enemy]
 
 placeCenterScore :: [Chess] -> Chess -> Int
 placeCenterScore cs c = let
@@ -60,7 +67,7 @@ stateScoresArray :: Array Int [Int]
 stateScoresArray = listArray (minState, maxState) $! stateScores
 
 chessToScore :: [Int] -> Chess -> Int
-chessToScore ss c = ss !! (c - 1)
+chessToScore ss c = ss !! c
 
 prepareStateScores :: IO ()
 prepareStateScores = do 
@@ -68,6 +75,6 @@ prepareStateScores = do
     return ()
 
 
-stateScore :: Int -> Chess -> Int
-stateScore state = chessToScore (stateScoresArray ! state) 
+stateScore :: State -> Chess -> Int
+stateScore (St state) = chessToScore (stateScoresArray ! state) 
 

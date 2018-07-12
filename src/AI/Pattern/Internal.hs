@@ -140,8 +140,8 @@ patternStrs =
     , ("01011" , 34)
     , ("0110"  , 10)
     , ("01010" , 9)
-    , ("011"   , 6)
-    , ("0101"  , 5)
+    , ("011"   , 5)
+    , ("0101"  , 4)
     ]
 patternCases :: (Num a, Eq a, Ord a) => [PatternScore a]
 patternCases = makeSymmetric $ flip map patternStrs $ \(p, s) -> PatternScore (fromJust (fromString p), s)

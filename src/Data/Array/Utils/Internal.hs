@@ -23,3 +23,12 @@ mapArray a f = let
     es = elems a
     as = zip is (zipWith f is es)
     in a // as
+
+inIndexRange :: Array (Int, Int) a -> (Int, Int) -> Bool
+inIndexRange a i = let
+    (w, h) = getSize a
+    in between 0 (w-1) (fst i) && between 0 (h-1) (snd i)
+
+
+between :: (Ord a) => a -> a -> a -> Bool
+between min max x = x <= max && x >= min

@@ -4,6 +4,7 @@ module AI.State
     , stateTrans
     , prepareStateScores
     , stateScore
+    , State()
     ) where
 
 import AI.State.Internal
