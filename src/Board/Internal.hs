@@ -22,7 +22,7 @@ putElems a (pe:pes) = do
     putElems na pes
 
 emptyBoard :: Int -> Int -> Board
-emptyBoard w h = genTableArray w h (const 0) 
+emptyBoard w h = genTableArray (w, h) (const 0) 
 
 getElem :: Board -> (Int , Int) -> Int
 getElem b pos = if inIndexRange b pos
@@ -35,7 +35,7 @@ listBoard ls = let
     h = length ls
     f (x, y) = (ls !! y) !! x
     in if equalW ls && all (all inElemRange) ls
-        then Just (genTableArray w h f)
+        then Just (genTableArray (w, h) f)
         else Nothing
 
 inElemRange :: Int -> Bool
@@ -56,7 +56,7 @@ size b = let
 toLists :: Board -> [[Int]]
 toLists b = let 
     (w, h) = size b
-    indexes = getIndexes w h
+    indexes = getIndexes (w, h)
     list = map (b !) indexes
     in chunksOf list w
 

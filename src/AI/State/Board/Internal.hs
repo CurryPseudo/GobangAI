@@ -18,15 +18,15 @@ type DirStates = (Int, M.Map Dir State)
 type Pos = (Int, Int)
 type Size = (Int, Int)
 
-empty :: Int -> Int -> BoardState
-empty w h = BS 0 (genTableArray w h $ buildDirStates (emptyBoard w h))
+empty :: (Int, Int) -> BoardState
+empty (w, h) = BS 0 (genTableArray (w, h) $ buildDirStates (emptyBoard w h))
 
 
 fromBoard :: Board -> BoardState
 fromBoard b = let
     updatePos pos bs = update bs (pos, getElem b pos)
     size = getSize b
-    in foldr updatePos (uncurry empty size) $ uncurry getIndexes size
+    in foldr updatePos (empty size) $ getIndexes size
 
 buildDirStates :: Board -> Pos -> DirStates
 buildDirStates b pos = let
