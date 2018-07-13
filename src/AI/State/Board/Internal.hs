@@ -1,13 +1,15 @@
 module AI.State.Board.Internal where
 
+import Data.Ord
+import Data.Tuple
+import Data.Maybe
+import Data.List
 import Control.Monad
-
 
 import qualified Data.Map.Strict as M
 import Data.Array
 
 import Data.Array.Utils
-import Data.Maybe
 import Board
 import AI.State
 
@@ -18,17 +20,19 @@ type DirStates = (Int, M.Map Dir State, (Int, Int))
 type Pos = (Int, Int)
 type Size = (Int, Int)
 
-empty :: (Int, Int) -> BoardState
-empty (w, h) = let
+empty :: (Int, Int) -> Int -> BoardState
+empty (w, h) bestCount = BS 0 as choice where
     as = genTableArray (w, h) $ buildDirStates (emptyBoard w h)
-    BS 0 ()
+    ie = assocs as
+    ns f (_, _, s) = f s 
+    sorted f = map fst $ sortBy (comparing (ns f . snd)) ie
+    choice = zip (take bestCount (sorted fst)) (take bestCount (reverse (sorted snd)))
 
-
-fromBoard :: Board -> BoardState
-fromBoard b = let
+fromBoard :: Board -> Int -> BoardState
+fromBoard b bestCount = let
     updatePos pos bs = update bs (pos, getElem b pos)
     size = getSize b
-    in foldr updatePos (empty size) $ getIndexes size
+    in foldr updatePos (empty size bestCount) $ getIndexes size
 
 buildDirStates :: Board -> Pos -> DirStates
 buildDirStates b pos = let
@@ -46,17 +50,14 @@ dirStatesTransScore ce m e = let
     in sum deltaScores
 
 update :: BoardState -> PosElem -> BoardState
-update bs@(BS sc sts) pe@(p, e) = let
-    (ce, baseDirStates) = sts ! p 
-    deltaStateScore state = stateScore state e - stateScore state ce
-    deltaScores = map deltaStateScore (M.elems baseDirStates) 
-    deltaScore = sum deltaScores
-    locScore = locationScore (getSize sts) p * chessRltSign ce e
+update bs@(BS sc sts choices) pe@(p, e) = let
+    (ce, baseDirStates, (best, worst)) = sts ! p 
+    score = dirStatesTransScore ce baseDirStates e + locationScore (getSize sts) p * chessRltSign ce e
     (w, h) = getSize sts
     ndUdtPoses = udtedStatesPoses w h p
     udtAsFuncs = flip map ndUdtPoses $ \ pos -> mapAsUdtStates pos (udtStatesBase pos pe)
     nsts = foldr (\f x -> f x) sts udtAsFuncs // [(p, (e, baseDirStates))]
-    in BS (sc + fromInteger (toInteger deltaScore) + locScore) nsts
+    in BS (sc + score) nsts
 
 udtedStatesPoses :: Int -> Int -> Pos -> [Pos]
 udtedStatesPoses w h p@(x, y) = let
