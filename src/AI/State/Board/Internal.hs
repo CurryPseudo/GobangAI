@@ -11,15 +11,17 @@ import Data.Maybe
 import Board
 import AI.State
 
-data BoardState = BS {score :: Int, states :: ArrayState} deriving (Eq, Show)
+data BoardState = BS {score :: !Int, states :: !ArrayState, bestChoice :: ![(Pos, Pos)]} deriving (Eq, Show)
 type ArrayState = Array (Int, Int) DirStates 
 data Dir = Horizontal | Vertical | MainDiag | Diag deriving (Show, Eq, Ord)
-type DirStates = (Int, M.Map Dir State)
+type DirStates = (Int, M.Map Dir State, (Int, Int))
 type Pos = (Int, Int)
 type Size = (Int, Int)
 
 empty :: (Int, Int) -> BoardState
-empty (w, h) = BS 0 (genTableArray (w, h) $ buildDirStates (emptyBoard w h))
+empty (w, h) = let
+    as = genTableArray (w, h) $ buildDirStates (emptyBoard w h)
+    BS 0 ()
 
 
 fromBoard :: Board -> BoardState
@@ -34,7 +36,14 @@ buildDirStates b pos = let
     insertDir (d, vec) = M.insert d (dirState vec)
     rMap = foldr insertDir M.empty dirVecs
     re = getElem b pos
-    in (re, rMap)
+    cScore c = dirStatesTransScore re rMap c + locationScore (getSize b) pos * chessRltSign re c
+    in (re, rMap, (cScore 1, cScore 2))
+
+dirStatesTransScore :: Int -> M.Map Dir State -> Int -> Int
+dirStatesTransScore ce m e = let
+    deltaStateScore state = stateScore state e - stateScore state ce
+    deltaScores = map deltaStateScore (M.elems m) 
+    in sum deltaScores
 
 update :: BoardState -> PosElem -> BoardState
 update bs@(BS sc sts) pe@(p, e) = let
