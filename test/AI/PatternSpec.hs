@@ -1,8 +1,10 @@
 module AI.PatternSpec where
 
 import Data.Char
+import Data.List
 
 import Test.Hspec
+import Test.QuickCheck
 
 import AI.Pattern
 import Gobang
@@ -39,8 +41,24 @@ spec =
           chessesJudgePatternsTest "01101110110" `shouldBe` ["011011", "10110"]
           chessesJudgePatternsTest "011011110220" `shouldBe` ["0110", "011110", "0220"]
           chessesJudgePatternsTest "00111" `shouldBe` ["0111"]
+        it "return patterns contained in itself" $ property $
+            forAll (resize 50 (listOf (choose (0, 2)))) $ \xs ->
+                let
+                    patterns = fst (chessesJudge xs)
+                in all (`isInfixOf` xs) patterns
+
         it "return a compareable num from a chess sequence" $ do
           chessesJudgeScoresComp "01101" "011011" `shouldBe` LT
           chessesJudgeScoresComp "011010110" "01101110110" `shouldBe` LT
           chessesJudgeScoresComp "021010" "022110" `shouldBe` GT
           chessesJudgeScoresComp "0220201110" "0111022020" `shouldBe` EQ
+        it "return proper score" $ property $
+            forAll (resize 50 (listOf (choose (0, 2)))) $ \xs ->
+                let
+                    score ys = snd (chessesJudge ys)
+                    wrap c = [c:xs, xs ++ [c], c:xs ++ [c]]
+                    tl = [ (1, (>=))
+                         , (2, (<=))
+                         ]
+                    valid (c, comp) = all (\ys -> score ys `comp` score xs) (wrap c)
+                in all valid tl

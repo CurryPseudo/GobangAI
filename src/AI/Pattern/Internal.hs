@@ -83,7 +83,7 @@ swapC 2 = 1
 swapC x = x
 
 foldPS :: (Num a) => [PatternScore a] -> ([[Int]], a)
-foldPS pss = foldr step ([], 0) pss where
+foldPS = foldr step ([], 0) where
     step (PatternScore (ops, os)) (ps, s) = (ops:ps, s + os)
 
 chessesJudgeSingle :: (Num a, Ord a, Eq a) => [Chess] -> [PatternScore a]
@@ -224,5 +224,5 @@ scoreZero ps = psScore ps == 0
 
 matchPrefix :: (Num a, Ord a, Eq a) => [Chess] -> [PatternScore a]
 --matchPrefix c = filter (not . scoreZero) $ matchPrefixByTree matchTreeCase c
-matchPrefix c = matchPrefixByTree matchTreeCase c
+matchPrefix = matchPrefixByTree matchTreeCase
 
