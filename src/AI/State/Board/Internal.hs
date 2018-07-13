@@ -42,17 +42,28 @@ update bs@(BS sc sts) pe@(p, e) = let
     deltaStateScore state = stateScore state e - stateScore state ce
     deltaScores = map deltaStateScore (M.elems baseDirStates) 
     deltaScore = sum deltaScores
+    locScore = locationScore (getSize sts) p * chessRltSign ce e
     (w, h) = getSize sts
     ndUdtPoses = udtedStatesPoses w h p
     udtAsFuncs = flip map ndUdtPoses $ \ pos -> mapAsUdtStates pos (udtStatesBase pos pe)
     nsts = foldr (\f x -> f x) sts udtAsFuncs // [(p, (e, baseDirStates))]
-    in BS (sc + fromInteger (toInteger deltaScore)) nsts
+    in BS (sc + fromInteger (toInteger deltaScore) + locScore) nsts
 
 udtedStatesPoses :: Int -> Int -> Pos -> [Pos]
 udtedStatesPoses w h p@(x, y) = let
     between min max x = x >= min && x <= max
     inEdge (x, y) = between 0 (w - 1) x && between 0 (h - 1) y
     in filter inEdge $ udtedStatesPosesUnFilter p
+
+locationScore :: Size -> Pos -> Int
+locationScore (w, h) (x, y) = let
+    score m n = max m (n - 1 - m)
+    in score x w + score y h
+
+chessRltSign :: Int -> Int -> Int
+chessRltSign 0 x = (x - 1) * (-2) + 1
+chessRltSign x 0 = - chessRltSign 0 x
+chessRltSign x y = (x - y) * 2
 
 udtedStatesPosesUnFilter :: Pos -> [Pos]
 udtedStatesPosesUnFilter p = flip concatMap dirVecs $ \(_, d) ->

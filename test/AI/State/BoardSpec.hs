@@ -16,13 +16,14 @@ spec =
                 b1 = listBoard [ [0, 0, 0, 0, 0]
                                , [0, 1, 1, 0, 0]
                                , [0, 0, 0, 0, 0]
+                               , [0, 0, 0, 0, 0]
                                ]
                 b2 = listBoard [ [0, 0, 0, 0, 0]
                                , [0, 0, 1, 0, 0]
                                , [0, 0, 1, 0, 0]
                                , [0, 0, 0, 0, 0]
                                ]   
-                in compare (sb b1) (sb b2) `shouldBe` EQ
+                in compare (sb b1) (sb b2) `shouldBe` LT
             
             let 
                 b1 = listBoard [ [0, 0, 0, 0, 0]
