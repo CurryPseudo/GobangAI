@@ -21,6 +21,13 @@ type Size = (Int, Int)
 empty :: Int -> Int -> BoardState
 empty w h = BS 0 (genTableArray w h $ buildDirStates (emptyBoard w h))
 
+
+fromBoard :: Board -> BoardState
+fromBoard b = let
+    updatePos pos bs = update bs (pos, getElem b pos)
+    size = getSize b
+    in foldr updatePos (uncurry empty size) $ uncurry getIndexes size
+
 buildDirStates :: Board -> Pos -> DirStates
 buildDirStates b pos = let
     dirState dir = fromChesses $ map (getElem b) $ dirSeq pos dir
@@ -28,12 +35,6 @@ buildDirStates b pos = let
     rMap = foldr insertDir M.empty dirVecs
     re = getElem b pos
     in (re, rMap)
-
-fromBoard :: Board -> BoardState
-fromBoard b = let
-    updatePos pos bs = update bs (pos, getElem b pos)
-    size = getSize b
-    in foldr updatePos (uncurry empty size) $ uncurry getIndexes size
 
 update :: BoardState -> PosElem -> BoardState
 update bs@(BS sc sts) pe@(p, e) = let
@@ -43,8 +44,7 @@ update bs@(BS sc sts) pe@(p, e) = let
     deltaScore = sum deltaScores
     (w, h) = getSize sts
     ndUdtPoses = udtedStatesPoses w h p
-    udtAsFuncs = flip map ndUdtPoses $ \pos ->
-        udtStatesBase pos pe
+    udtAsFuncs = flip map ndUdtPoses $ \ pos -> mapAsUdtStates pos (udtStatesBase pos pe)
     nsts = foldr (\f x -> f x) sts udtAsFuncs // [(p, (e, baseDirStates))]
     in BS (sc + fromInteger (toInteger deltaScore)) nsts
 
@@ -58,14 +58,15 @@ udtedStatesPosesUnFilter :: Pos -> [Pos]
 udtedStatesPosesUnFilter p = flip concatMap dirVecs $ \(_, d) ->
     dirSeq p d
 
-udtStatesBase :: Pos -> PosElem -> ArrayState -> ArrayState
-udtStatesBase pos (bp, be) as = let
+udtStatesBase :: Pos -> PosElem -> DirStates -> DirStates
+udtStatesBase pos (bp, be) ds = let
     Just (dir, statePos) = rltvDirPos pos bp
     fds :: M.Map Dir State -> M.Map Dir State
     fds = M.adjust (stateTrans statePos be) dir
-    ds :: DirStates
-    ds = as ! pos
-    in as // [(pos, mapSnd fds ds)]
+    in mapSnd fds ds
+
+mapAsUdtStates :: Pos -> (DirStates -> DirStates) -> ArrayState -> ArrayState
+mapAsUdtStates pos f as = as // [(pos, f (as ! pos))]
 
 mapSnd :: (b -> b) -> (a, b) -> (a, b)
 mapSnd f (x, y) = (x, f y)
