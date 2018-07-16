@@ -34,7 +34,7 @@ empty (w, h) bestCount = BS 0 as choice where
     as = genTableArray (w, h) $ buildDirStates (emptyBoard w h)
     ie = assocs as
     sorted f = map fst $ sortOn (f . toScoresMap . snd) ie
-    choice = (take bestCount (sorted (!! 1)),take bestCount (reverse (sorted (!! 2))))
+    choice = (take bestCount (reverse (sorted (!! 1))),take bestCount (sorted (!! 2)))
 
 fromBoard :: Board -> Int -> BoardState
 fromBoard b bestCount = let
@@ -48,7 +48,7 @@ buildDirStates b pos = let
     insertDir (d, vec) = M.insert d (dirState vec)
     rMap = foldr insertDir M.empty dirVecs
     re = getElem b pos
-    in (re, rMap, scoreCombine rMap (getSize b) pos re)
+    in (re, rMap, deltaScoreCombine rMap (getSize b) pos re)
 
 dirStatesTransScore :: Int -> M.Map Dir State -> Int -> Int
 dirStatesTransScore ce m e = let
@@ -56,8 +56,8 @@ dirStatesTransScore ce m e = let
     deltaScores = map deltaStateScore (M.elems m) 
     in sum deltaScores
 
-scoreCombine :: M.Map Dir State -> Size -> Pos ->  Int -> [Int]
-scoreCombine dsm s pos ce = flip map [0..2] $ \c -> dirStatesTransScore ce dsm c + locationScore s pos * chessRltSign ce c
+deltaScoreCombine :: M.Map Dir State -> Size -> Pos ->  Int -> [Int]
+deltaScoreCombine dsm s pos ce = flip map [0..2] $ \c -> dirStatesTransScore ce dsm c + locationScore s pos * chessRltSign ce c
 
 
 update :: BoardState -> PosElem -> BoardState
@@ -66,22 +66,33 @@ update bs@(BS sc sts choices) pe@(p, e) = let
     deltaScore = scoreMap !! e
     (w, h) = getSize sts
     ndUdtPoses = udtedStatesPoses w h p
-    scoreTrans p (e, dsm, _) = (e, dsm, scoreCombine dsm (w, h) p e)
+    scoreTrans p (e, dsm, _) = (e, dsm, deltaScoreCombine dsm (w, h) p e)
     udtAsFuncs = flip map ndUdtPoses $ \ pos -> mapAsUdtStates pos (scoreTrans pos . udtStatesBase pos pe)
-    nsts = foldr (\f x -> f x) sts udtAsFuncs // [(p, (e, baseDirStates, scoreCombine baseDirStates (w, h) p e))]
+    nsts = foldr (\f x -> f x) sts udtAsFuncs // [(p, (e, baseDirStates, deltaScoreCombine baseDirStates (w, h) p e))]
     emptyPoses = filter (\pos -> boardElem (sts ! pos) == 0) ndUdtPoses
     nChoices = foldr (insertBestChoices nsts) choices emptyPoses
     in BS(sc + deltaScore) nsts nChoices
 
 insertBestChoices :: ArrayState -> Pos -> ([Pos], [Pos]) -> ([Pos], [Pos])
-insertBestChoices as p before = (inserts (!! 1) bests, inserts (!! 2) worsts) where
-    takeScore f p = f scores where
+insertBestChoices as p before = (inserts (flip (comparing ((!! 1) . takeScore))) bests, inserts (comparing ((!! 2) . takeScore)) worsts) where
+    takeScore p = scores where
         (_, _, scores) = as ! p
-    inserts f = insertNotIncreaseCount (comparing (takeScore f)) p
+    inserts f = insertNotIncreaseCount f p
     (bests, worsts) = before
 
-insertNotIncreaseCount :: (a -> a -> Ordering) -> a -> [a] -> [a]
-insertNotIncreaseCount comp x xs = take (length xs) $ insertBy comp x xs
+allyScore :: BoardState -> Pos -> Int
+allyScore bs p = scoreMap !! 1 where
+    (_, _, scoreMap) = states bs ! p
+
+enemyScore :: BoardState -> Pos -> Int
+enemyScore bs p = scoreMap !! 2 where
+    (_, _, scoreMap) = states bs ! p
+
+
+insertNotIncreaseCount :: (Eq a) => (a -> a -> Ordering) -> a -> [a] -> [a]
+insertNotIncreaseCount comp x xs = if x `elem` xs
+                                   then xs
+                                   else take (length xs) $ insertBy comp x xs
 
 udtedStatesPoses :: Int -> Int -> Pos -> [Pos]
 udtedStatesPoses w h p@(x, y) = let
@@ -91,10 +102,11 @@ udtedStatesPoses w h p@(x, y) = let
 
 locationScore :: Size -> Pos -> Int
 locationScore (w, h) (x, y) = let
-    score m n = max m (n - 1 - m)
+    score m n = min m (n - 1 - m)
     in score x w + score y h
 
 chessRltSign :: Int -> Int -> Int
+chessRltSign 0 0 = 0
 chessRltSign 0 x = (x - 1) * (-2) + 1
 chessRltSign x 0 = - chessRltSign 0 x
 chessRltSign x y = (x - y) * 2
@@ -157,3 +169,14 @@ stateSeq = [-4, -3, -2, -1, 1, 2, 3, 4]
 dirSeq :: Pos -> (Int, Int) -> [Pos]
 dirSeq p (rx, ry)= flip map stateSeq $ \l ->
     pAdd p (l * rx, l * ry)
+
+testBoardState :: BoardState
+testBoardState = flip fromBoard 10 $ fromJust $ listBoard [ [0,0,0,0,0,0,0,0,0]
+                                                          , [0,0,0,0,0,0,0,0,0]
+                                                          , [0,0,0,0,0,0,0,0,0]
+                                                          , [0,0,0,0,0,2,1,0,0]
+                                                          , [0,0,0,1,1,1,2,0,0]
+                                                          , [0,0,0,0,0,2,2,0,0]
+                                                          , [0,0,0,0,0,0,0,0,0]
+                                                          , [0,0,0,0,0,0,0,0,0]
+                                                          ]                    

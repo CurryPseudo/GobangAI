@@ -3,6 +3,7 @@ module AI.State.Board ( BoardState()
                       , fromBoard
                       , update
                       , score
+                      , bestChoice
 ) where
 
 import AI.State.Board.Internal
