@@ -21,7 +21,7 @@
 # resolver: lts-11.14
 resolver: nightly-2018-06-29
 extra-deps:
-
+- ordered-containers-0.1.0
 # User packages to be built.
 # Various formats can be used as shown in the example below.
 #

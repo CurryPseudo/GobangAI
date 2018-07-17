@@ -4,7 +4,8 @@ import Data.Ord
 import Data.Tuple
 import Data.Maybe
 import Data.List
-import Control.Monad
+import Text.Printf
+import Debug.Trace
 
 import qualified Data.Map.Strict as M
 import Data.Array
@@ -12,21 +13,22 @@ import Data.Array
 import Data.Array.Utils
 import Board
 import AI.State
+import AI.State.Board.Vector
+import AI.State.Board.Dir
+import AI.State.Board.PosScore
 
-data BoardState = BS {score :: !Int, states :: !ArrayState, bestChoice :: !([Pos], [Pos])} deriving (Eq, Show)
+data BoardState = BS {score :: !Int, states :: !ArrayState, bestChoice :: ![[PosScore]]} deriving (Eq, Show)
 type ArrayState = Array (Int, Int) DirStates 
-data Dir = Horizontal | Vertical | MainDiag | Diag deriving (Show, Eq, Ord)
 type DirStates = (Int, M.Map Dir State, [Int])
-boardElem :: DirStates -> Int
-boardElem (e, _, _) = e
+
+getBoardElem :: DirStates -> Int
+getBoardElem (e, _, _) = e
 
 toDirStateMap :: DirStates -> M.Map Dir State
 toDirStateMap (_, dsm, _) = dsm
 
 toScoresMap :: DirStates -> [Int]
 toScoresMap (_, _, sm) = sm
-type Pos = (Int, Int)
-type Size = (Int, Int)
 
 
 empty :: (Int, Int) -> Int -> BoardState
@@ -34,7 +36,7 @@ empty (w, h) bestCount = BS 0 as choice where
     as = genTableArray (w, h) $ buildDirStates (emptyBoard w h)
     ie = assocs as
     sorted f = map fst $ sortOn (f . toScoresMap . snd) ie
-    choice = (take bestCount (reverse (sorted (!! 1))),take bestCount (sorted (!! 2)))
+    choice = map (sort . (\chess -> map (\pos -> genPosScore as pos chess) (getIndexes (w, h)))) [0..2]
 
 fromBoard :: Board -> Int -> BoardState
 fromBoard b bestCount = let
@@ -65,40 +67,17 @@ update bs@(BS sc sts choices) pe@(p, e) = let
     (ce, baseDirStates, scoreMap) = sts ! p 
     deltaScore = scoreMap !! e
     (w, h) = getSize sts
-    ndUdtPoses = udtedStatesPoses w h p
+    ndUdtPoses = aroundDirPosesInEdge (w, h) p
     scoreTrans p (e, dsm, _) = (e, dsm, deltaScoreCombine dsm (w, h) p e)
     udtAsFuncs = flip map ndUdtPoses $ \ pos -> mapAsUdtStates pos (scoreTrans pos . udtStatesBase pos pe)
     nsts = foldr (\f x -> f x) sts udtAsFuncs // [(p, (e, baseDirStates, deltaScoreCombine baseDirStates (w, h) p e))]
-    emptyPoses = filter (\pos -> boardElem (sts ! pos) == 0) ndUdtPoses
-    nChoices = foldr (insertBestChoices nsts) choices emptyPoses
+    emptyPoses = filter (\pos -> getBoardElem (sts ! pos) == 0) ndUdtPoses
+    updateChoices :: Pos -> [[PosScore]] -> [[PosScore]]
+    updateChoices pos = zipWith updateSub [0..2] where
+        updateSub :: Int -> [PosScore] -> [PosScore]
+        updateSub chess = undefined
+    nChoices = foldr updateChoices choices emptyPoses
     in BS(sc + deltaScore) nsts nChoices
-
-insertBestChoices :: ArrayState -> Pos -> ([Pos], [Pos]) -> ([Pos], [Pos])
-insertBestChoices as p before = (inserts (flip (comparing ((!! 1) . takeScore))) bests, inserts (comparing ((!! 2) . takeScore)) worsts) where
-    takeScore p = scores where
-        (_, _, scores) = as ! p
-    inserts f = insertNotIncreaseCount f p
-    (bests, worsts) = before
-
-allyScore :: BoardState -> Pos -> Int
-allyScore bs p = scoreMap !! 1 where
-    (_, _, scoreMap) = states bs ! p
-
-enemyScore :: BoardState -> Pos -> Int
-enemyScore bs p = scoreMap !! 2 where
-    (_, _, scoreMap) = states bs ! p
-
-
-insertNotIncreaseCount :: (Eq a) => (a -> a -> Ordering) -> a -> [a] -> [a]
-insertNotIncreaseCount comp x xs = if x `elem` xs
-                                   then xs
-                                   else take (length xs) $ insertBy comp x xs
-
-udtedStatesPoses :: Int -> Int -> Pos -> [Pos]
-udtedStatesPoses w h p@(x, y) = let
-    between min max x = x >= min && x <= max
-    inEdge (x, y) = between 0 (w - 1) x && between 0 (h - 1) y
-    in filter inEdge $ udtedStatesPosesUnFilter p
 
 locationScore :: Size -> Pos -> Int
 locationScore (w, h) (x, y) = let
@@ -111,13 +90,10 @@ chessRltSign 0 x = (x - 1) * (-2) + 1
 chessRltSign x 0 = - chessRltSign 0 x
 chessRltSign x y = (x - y) * 2
 
-udtedStatesPosesUnFilter :: Pos -> [Pos]
-udtedStatesPosesUnFilter p = flip concatMap dirVecs $ \(_, d) ->
-    dirSeq p d
 
 udtStatesBase :: Pos -> PosElem -> DirStates -> DirStates
 udtStatesBase pos (bp, be) (e, m, scoreMap) = let
-    Just (dir, statePos) = rltvDirPos pos bp
+    Just (dir, statePos) = relativeDirLength pos bp
     fds :: M.Map Dir State -> M.Map Dir State
     fds = M.adjust (stateTrans statePos be) dir
     in (e, fds m, scoreMap)
@@ -125,50 +101,7 @@ udtStatesBase pos (bp, be) (e, m, scoreMap) = let
 mapAsUdtStates :: Pos -> (DirStates -> DirStates) -> ArrayState -> ArrayState
 mapAsUdtStates pos f as = as // [(pos, f (as ! pos))]
 
-mapSnd :: (b -> b) -> (a, b) -> (a, b)
-mapSnd f (x, y) = (x, f y)
 
-
-doPos2 :: (Int -> Int -> Int) -> Pos -> Pos -> Pos
-doPos2 f (x1, y1) (x2, y2) = (f x1 x2, f y1 y2)
-
-doPos :: (Int -> Int) -> Pos -> Pos
-doPos f (x, y) = (f x, f y)
-
-pAdd = doPos2 (+)
-pSub = doPos2 (-)
-pMul = doPos2 (*)
-pQuot = doPos2 quot
-rltvDirPos :: Pos -> Pos -> Maybe (Dir, Int)
-rltvDirPos (bx, by) (x, y) = let
-    d = (x - bx, y - by)
-    in msum $ flip map dirVecs $ \(dir, vec) -> do
-        len <- vecLen d vec
-        let pos = if len > 0
-                  then len + 3
-                  else len + 4
-        return (dir, pos)
-
-dirVecs :: [(Dir, (Int, Int))]
-dirVecs = [ (Horizontal, (1, 0))
-          , (Vertical, (0, 1))
-          , (MainDiag, (1, 1))
-          , (Diag, (1, -1))
-          ]
-
-vecLen :: (Int, Int) -> (Int, Int) -> Maybe Int
-vecLen (0, 0) _ = Nothing
-vecLen (dx, dy) (rx, ry) = if dx * ry == dy * rx
-                           then if rx /= 0
-                                then Just $ dx `quot` rx
-                                else Just $ dy `quot` ry
-                           else Nothing
-
-stateSeq = [-4, -3, -2, -1, 1, 2, 3, 4]
-
-dirSeq :: Pos -> (Int, Int) -> [Pos]
-dirSeq p (rx, ry)= flip map stateSeq $ \l ->
-    pAdd p (l * rx, l * ry)
 
 testBoardState :: BoardState
 testBoardState = flip fromBoard 10 $ fromJust $ listBoard [ [0,0,0,0,0,0,0,0,0]
@@ -180,3 +113,8 @@ testBoardState = flip fromBoard 10 $ fromJust $ listBoard [ [0,0,0,0,0,0,0,0,0]
                                                           , [0,0,0,0,0,0,0,0,0]
                                                           , [0,0,0,0,0,0,0,0,0]
                                                           ]                    
+
+genPosScore :: ArrayState -> Pos -> Int -> PosScore
+genPosScore as pos = PS pos scoresFunc where
+    scoresFunc :: Pos -> [Int]
+    scoresFunc = toScoresMap . (as !)
