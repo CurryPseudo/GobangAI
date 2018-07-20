@@ -31,18 +31,20 @@ toScoresMap :: DirStates -> [Int]
 toScoresMap (_, _, sm) = sm
 
 
-empty :: (Int, Int) -> Int -> BoardState
-empty (w, h) bestCount = BS 0 as choice where
+empty :: (Int, Int) -> BoardState
+empty (w, h) = BS 0 as choice where
     as = genTableArray (w, h) $ buildDirStates (emptyBoard w h)
     ie = assocs as
     sorted f = map fst $ sortOn (f . toScoresMap . snd) ie
     choice = map (sort . (\chess -> map (\pos -> genPosScore as pos chess) (getIndexes (w, h)))) [0..2]
 
-fromBoard :: Board -> Int -> BoardState
-fromBoard b bestCount = let
+fromBoard :: Board -> BoardState
+fromBoard b = let
     updatePos pos bs = update bs (pos, getElem b pos)
     size = getSize b
-    in foldr updatePos (empty size bestCount) $ getIndexes size
+    in foldr updatePos (empty size) $ getIndexes size
+
+
 
 buildDirStates :: Board -> Pos -> DirStates
 buildDirStates b pos = let
@@ -75,7 +77,7 @@ update bs@(BS sc sts choices) pe@(p, e) = let
     updateChoices :: Pos -> [[PosScore]] -> [[PosScore]]
     updateChoices pos = zipWith updateSub [0..2] where
         updateSub :: Int -> [PosScore] -> [PosScore]
-        updateSub chess = undefined
+        updateSub chess = updateSortedList (genPosScore nsts pos chess)
     nChoices = foldr updateChoices choices emptyPoses
     in BS(sc + deltaScore) nsts nChoices
 
@@ -104,17 +106,20 @@ mapAsUdtStates pos f as = as // [(pos, f (as ! pos))]
 
 
 testBoardState :: BoardState
-testBoardState = flip fromBoard 10 $ fromJust $ listBoard [ [0,0,0,0,0,0,0,0,0]
-                                                          , [0,0,0,0,0,0,0,0,0]
-                                                          , [0,0,0,0,0,0,0,0,0]
-                                                          , [0,0,0,0,0,2,1,0,0]
-                                                          , [0,0,0,1,1,1,2,0,0]
-                                                          , [0,0,0,0,0,2,2,0,0]
-                                                          , [0,0,0,0,0,0,0,0,0]
-                                                          , [0,0,0,0,0,0,0,0,0]
-                                                          ]                    
+testBoardState = fromBoard $ fromJust $ listBoard [ [0,0,0,0,0,0,0,0,0]
+                                                  , [0,0,0,0,0,0,0,0,0]
+                                                  , [0,0,0,0,0,0,0,0,0]
+                                                  , [0,0,0,0,0,2,1,0,0]
+                                                  , [0,0,0,1,1,1,2,0,0]
+                                                  , [0,0,0,0,0,2,2,0,0]
+                                                  , [0,0,0,0,0,0,0,0,0]
+                                                  , [0,0,0,0,0,0,0,0,0]
+                                                  ]                    
 
 genPosScore :: ArrayState -> Pos -> Int -> PosScore
 genPosScore as pos = PS pos scoresFunc where
     scoresFunc :: Pos -> [Int]
     scoresFunc = toScoresMap . (as !)
+
+chessBest :: BoardState -> Int -> Int -> [Pos]
+chessBest bs chess top = map pos $ take top (bestChoice bs !! chess)

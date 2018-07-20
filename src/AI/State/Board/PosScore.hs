@@ -1,5 +1,6 @@
 module AI.State.Board.PosScore where
 
+import Data.List
 import Text.Printf
 
 import AI.State.Board.Vector
@@ -19,9 +20,7 @@ instance Ord PosScore where
         comp 2 x y = compare x y
 
 instance Show PosScore where
-    show ps = printf "(Pos: %s, Chess: %s, Score: %s)" (show (pos ps)) (show (toScores ps)) (show (chess ps))
+    show ps = printf "(Pos: %s, Score: %s, Chess: %s)" (show (pos ps)) (show (toScores ps)) (show (chess ps))
 
 updateSortedList :: PosScore -> [PosScore] -> [PosScore]
-updateSortedList ps pss = let
-    find :: Bool
-    find = 
+updateSortedList ps pss = insert ps (delete ps pss)
