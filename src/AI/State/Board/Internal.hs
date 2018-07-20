@@ -71,8 +71,9 @@ update bs@(BS sc sts choices) pe@(p, e) = let
     (w, h) = getSize sts
     ndUdtPoses = aroundDirPosesInEdge (w, h) p
     scoreTrans p (e, dsm, _) = (e, dsm, deltaScoreCombine dsm (w, h) p e)
-    udtAsFuncs = flip map ndUdtPoses $ \ pos -> mapAsUdtStates pos (scoreTrans pos . udtStatesBase pos pe)
-    nsts = foldr (\f x -> f x) sts udtAsFuncs // [(p, (e, baseDirStates, deltaScoreCombine baseDirStates (w, h) p e))]
+    udtAsFuncs :: [(Pos, DirStates)]
+    udtAsFuncs = flip map ndUdtPoses $ \ pos -> mapAsUdtStates sts pos (scoreTrans pos . udtStatesBase pos pe)
+    nsts = sts // ((p, (e, baseDirStates, deltaScoreCombine baseDirStates (w, h) p e)):udtAsFuncs)
     emptyPoses = filter (\pos -> getBoardElem (sts ! pos) == 0) ndUdtPoses
     updateChoices :: Pos -> [[PosScore]] -> [[PosScore]]
     updateChoices pos = zipWith updateSub [0..2] where
@@ -100,8 +101,8 @@ udtStatesBase pos (bp, be) (e, m, scoreMap) = let
     fds = M.adjust (stateTrans statePos be) dir
     in (e, fds m, scoreMap)
 
-mapAsUdtStates :: Pos -> (DirStates -> DirStates) -> ArrayState -> ArrayState
-mapAsUdtStates pos f as = as // [(pos, f (as ! pos))]
+mapAsUdtStates :: ArrayState -> Pos -> (DirStates -> DirStates) -> (Pos, DirStates)
+mapAsUdtStates as pos f = (pos, f (as ! pos))
 
 
 
@@ -122,4 +123,4 @@ genPosScore as pos = PS pos scoresFunc where
     scoresFunc = toScoresMap . (as !)
 
 chessBest :: BoardState -> Int -> Int -> [Pos]
-chessBest bs chess top = map pos $ take top (bestChoice bs !! chess)
+chessBest bs chess top = take top $ filter (\pos -> getBoardElem (states bs ! pos) == 0) $ map pos (bestChoice bs !! chess)
