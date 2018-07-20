@@ -1,41 +1,42 @@
-	Fri Jul 20 17:53 2018 Time and Allocation Profiling Report  (Final)
+	Fri Jul 20 18:00 2018 Time and Allocation Profiling Report  (Final)
 
 	   GobangAI-exe.EXE +RTS -N -p -RTS
 
-	total time  =        4.61 secs   (17090 ticks @ 1000 us, 8 processors)
-	total alloc = 22,814,229,040 bytes  (excludes profiling overheads)
+	total time  =       13.92 secs   (51570 ticks @ 1000 us, 8 processors)
+	total alloc = 85,663,826,968 bytes  (excludes profiling overheads)
 
 COST CENTRE                         MODULE                  SRC                                              %time %alloc
 
-toScores                            AI.State.Board.PosScore src\AI\State\Board\PosScore.hs:11:1-48            10.2    3.8
-updateSortedList                    AI.State.Board.PosScore src\AI\State\Board\PosScore.hs:26:1-51             9.0    9.8
-genPosScore.scoresFunc              AI.State.Board.Internal src\AI\State\Board\Internal.hs:123:5-37            8.8    0.0
-stateScore                          AI.State.Internal       src\AI\State\Internal.hs:79:1-63                   5.3    4.6
-update.nsts                         AI.State.Board.Internal src\AI\State\Board\Internal.hs:76:5-98             4.0    4.8
-dirStatesTransScore.deltaScores     AI.State.Board.Internal src\AI\State\Board\Internal.hs:60:5-49             3.6    6.4
-scores                              AI.State.Board.PosScore src\AI\State\Board\PosScore.hs:8:33-38             3.5    0.0
-doPos2                              AI.State.Board.Vector   src\AI\State\Board\Vector.hs:7:1-47                3.0    6.0
-update.emptyPoses.\                 AI.State.Board.Internal src\AI\State\Board\Internal.hs:77:34-62            2.8    0.0
-chessToScore                        AI.State.Internal       src\AI\State\Internal.hs:70:1-27                   2.7    0.0
-dirSeq.\                            AI.State.Board.Dir      src\AI\State\Board\Dir.hs:21:5-27                  2.7    6.0
-compare                             AI.State.Board.PosScore src\AI\State\Board\PosScore.hs:(17,5)-(20,32)      2.5    5.0
-udtStatesBase.fds                   AI.State.Board.Internal src\AI\State\Board\Internal.hs:101:5-47            2.4    2.1
-update.updateChoices                AI.State.Board.Internal src\AI\State\Board\Internal.hs:(79,5)-(81,71)      2.4    7.2
-update.udtAsFuncs                   AI.State.Board.Internal src\AI\State\Board\Internal.hs:75:5-110            2.2    4.5
+toScores                            AI.State.Board.PosScore src\AI\State\Board\PosScore.hs:11:1-48            10.5    3.7
+genPosScore.scoresFunc              AI.State.Board.Internal src\AI\State\Board\Internal.hs:123:5-37            9.1    0.0
+updateSortedList                    AI.State.Board.PosScore src\AI\State\Board\PosScore.hs:26:1-51             8.8    9.6
+stateScore                          AI.State.Internal       src\AI\State\Internal.hs:79:1-63                   5.4    4.7
+update.nsts                         AI.State.Board.Internal src\AI\State\Board\Internal.hs:76:5-98             4.3    4.9
+scores                              AI.State.Board.PosScore src\AI\State\Board\PosScore.hs:8:33-38             4.1    0.0
+dirStatesTransScore.deltaScores     AI.State.Board.Internal src\AI\State\Board\Internal.hs:60:5-49             3.4    6.4
+dirSeq.\                            AI.State.Board.Dir      src\AI\State\Board\Dir.hs:21:5-27                  2.9    6.1
+doPos2                              AI.State.Board.Vector   src\AI\State\Board\Vector.hs:7:1-47                2.9    6.1
+update.emptyPoses.\                 AI.State.Board.Internal src\AI\State\Board\Internal.hs:77:34-62            2.9    0.0
+chessToScore                        AI.State.Internal       src\AI\State\Internal.hs:70:1-27                   2.6    0.0
+udtStatesBase.fds                   AI.State.Board.Internal src\AI\State\Board\Internal.hs:101:5-47            2.5    2.0
+update.updateChoices                AI.State.Board.Internal src\AI\State\Board\Internal.hs:(79,5)-(81,71)      2.5    7.3
+compare                             AI.State.Board.PosScore src\AI\State\Board\PosScore.hs:(17,5)-(20,32)      2.4    4.9
+update.udtAsFuncs                   AI.State.Board.Internal src\AI\State\Board\Internal.hs:75:5-110            2.2    4.6
 dirStatesTransScore.deltaStateScore AI.State.Board.Internal src\AI\State\Board\Internal.hs:59:5-68             2.0    0.9
-aroundDirPosesInEdge.inEdge         AI.State.Board.Dir      src\AI\State\Board\Dir.hs:36:5-62                  1.9    0.0
-genPosScore                         AI.State.Board.Internal src\AI\State\Board\Internal.hs:(121,1)-(123,37)    1.8    1.4
-dirSeq                              AI.State.Board.Dir      src\AI\State\Board\Dir.hs:(20,1)-(21,27)           1.7    4.6
-aroundDirPosesInEdge                AI.State.Board.Dir      src\AI\State\Board\Dir.hs:(34,1)-(40,31)           1.7    2.9
-update.udtAsFuncs.\                 AI.State.Board.Internal src\AI\State\Board\Internal.hs:75:49-110           1.6    6.0
-update.emptyPoses                   AI.State.Board.Internal src\AI\State\Board\Internal.hs:77:5-74             1.4    2.5
+dirSeq                              AI.State.Board.Dir      src\AI\State\Board\Dir.hs:(20,1)-(21,27)           1.8    4.7
+aroundDirPosesInEdge.inEdge         AI.State.Board.Dir      src\AI\State\Board\Dir.hs:36:5-62                  1.8    0.1
+genPosScore                         AI.State.Board.Internal src\AI\State\Board\Internal.hs:(121,1)-(123,37)    1.7    1.4
+update.udtAsFuncs.\                 AI.State.Board.Internal src\AI\State\Board\Internal.hs:75:49-110           1.6    6.1
+aroundDirPosesInEdge                AI.State.Board.Dir      src\AI\State\Board\Dir.hs:(34,1)-(40,31)           1.5    3.0
+update.emptyPoses                   AI.State.Board.Internal src\AI\State\Board\Internal.hs:77:5-74             1.5    2.6
 deltaScoreCombine.\                 AI.State.Board.Internal src\AI\State\Board\Internal.hs:64:58-127           1.4    0.6
-relativeDirLength                   AI.State.Board.Dir      src\AI\State\Board\Dir.hs:(24,1)-(31,25)           1.4    2.4
-deltaScoreCombine                   AI.State.Board.Internal src\AI\State\Board\Internal.hs:64:1-127            1.2    3.8
-update.updateChoices.updateSub      AI.State.Board.Internal src\AI\State\Board\Internal.hs:81:9-71             1.2    0.8
-update.nChoices                     AI.State.Board.Internal src\AI\State\Board\Internal.hs:82:5-53             1.2    2.8
-mapAsUdtStates                      AI.State.Board.Internal src\AI\State\Board\Internal.hs:105:1-45            1.1    1.9
-aroundDirPosesInEdge.unFiltered     AI.State.Board.Dir      src\AI\State\Board\Dir.hs:(38,5)-(39,18)           1.1    3.0
+relativeDirLength                   AI.State.Board.Dir      src\AI\State\Board\Dir.hs:(24,1)-(31,25)           1.2    2.3
+update.nChoices                     AI.State.Board.Internal src\AI\State\Board\Internal.hs:82:5-53             1.2    2.9
+aroundDirPosesInEdge.unFiltered     AI.State.Board.Dir      src\AI\State\Board\Dir.hs:(38,5)-(39,18)           1.2    3.1
+mapAsUdtStates                      AI.State.Board.Internal src\AI\State\Board\Internal.hs:105:1-45            1.1    1.8
+update                              AI.State.Board.Internal src\AI\State\Board\Internal.hs:(68,1)-(83,40)      1.0    0.5
+deltaScoreCombine                   AI.State.Board.Internal src\AI\State\Board\Internal.hs:64:1-127            1.0    3.7
+update.updateChoices.updateSub      AI.State.Board.Internal src\AI\State\Board\Internal.hs:81:9-71             1.0    0.8
 
 
                                                                                                                                                        individual      inherited
@@ -67,131 +68,131 @@ MAIN                                                      MAIN                  
    update.updateChoices                                   AI.State.Board.Internal   src\AI\State\Board\Internal.hs:(79,5)-(81,71)   656          0    0.0    0.0     0.0    0.0
  CAF:main1                                                Main                      <no location info>                              184          0    0.0    0.0     0.0    0.0
   main                                                    Main                      app\Main.hs:9:1-35                              352          1    0.0    0.0     0.0    0.0
- CAF:main2                                                Main                      <no location info>                              183          0    0.0    0.0    98.8   98.7
-  main                                                    Main                      app\Main.hs:9:1-35                              354          0    0.0    0.0    98.8   98.7
-   playSelf                                               Game                      src\Game.hs:(13,1)-(22,41)                      355          1    0.0    0.0    98.8   98.7
+ CAF:main2                                                Main                      <no location info>                              183          0    0.0    0.0    99.4   99.4
+  main                                                    Main                      app\Main.hs:9:1-35                              354          0    0.0    0.0    99.4   99.4
+   playSelf                                               Game                      src\Game.hs:(13,1)-(22,41)                      355          1    0.0    0.0    99.4   99.4
     playSelf.(...)                                        Game                      src\Game.hs:16:5-47                             357          1    0.0    0.0     0.0    0.0
      playSelf.notWin                                      Game                      src\Game.hs:15:5-47                             358         11    0.0    0.0     0.0    0.0
       score                                               AI.State.Board.Internal   src\AI\State\Board\Internal.hs:20:23-27         359         11    0.0    0.0     0.0    0.0
     playSelf.r                                            Game                      src\Game.hs:16:5-47                             803          1    0.0    0.0     0.0    0.0
-    playSelf.results                                      Game                      src\Game.hs:14:5-63                             356          1    0.0    0.0    98.8   98.7
-     playSelf.step                                        Game                      src\Game.hs:(18,5)-(22,41)                      368         10    0.0    0.0    98.7   98.7
+    playSelf.results                                      Game                      src\Game.hs:14:5-63                             356          1    0.0    0.0    99.4   99.4
+     playSelf.step                                        Game                      src\Game.hs:(18,5)-(22,41)                      368         10    0.0    0.0    99.4   99.4
       playSelf.step.next                                  Game                      src\Game.hs:22:9-41                             804         10    0.0    0.0     0.0    0.0
-      playSelf.step.nextPos                               Game                      src\Game.hs:19:9-45                             372         10    0.0    0.0    98.7   98.7
-       search                                             AI.Search                 src\AI\Search.hs:(13,1)-(53,90)                 373         10    0.0    0.0    98.7   98.7
+      playSelf.step.nextPos                               Game                      src\Game.hs:19:9-45                             372         10    0.0    0.0    99.4   99.4
+       search                                             AI.Search                 src\AI\Search.hs:(13,1)-(53,90)                 373         10    0.0    0.0    99.4   99.4
         search.(...)                                      AI.Search                 src\AI\Search.hs:15:5-31                        374         10    0.0    0.0     0.0    0.0
-        search.all                                        AI.Search                 src\AI\Search.hs:14:5-63                        375         10    0.0    0.0    98.7   98.7
-         search.searchSub                                 AI.Search                 src\AI\Search.hs:(17,5)-(53,90)                 376     354584    0.3    0.1    98.7   98.7
-          score                                           AI.State.Board.Internal   src\AI\State\Board\Internal.hs:20:23-27         714     256343    0.1    0.0     0.1    0.0
-          search.searchSub.r                              AI.Search                 src\AI\Search.hs:(27,9)-(29,19)                 377      98241    0.0    0.0     0.0    0.0
-           score                                          AI.State.Board.Internal   src\AI\State\Board\Internal.hs:20:23-27         378     100300    0.0    0.0     0.0    0.0
-          search.searchSub.(...)                          AI.Search                 src\AI\Search.hs:(23,9)-(26,30)                 715      96182    0.1    0.0     0.1    0.0
-          search.searchSub.r_                             AI.Search                 src\AI\Search.hs:(23,9)-(26,30)                 718      96182    0.0    0.0     0.0    0.0
-          search.searchSub.scanResult                     AI.Search                 src\AI\Search.hs:20:9-113                       381      96182    0.3    0.3    97.4   98.4
-           search.searchSub.step                          AI.Search                 src\AI\Search.hs:(31,9)-(53,90)                 616     354574    0.6    0.6    97.1   98.2
-            search.searchSub.step.(...)                   AI.Search                 src\AI\Search.hs:36:13-87                       623     354574    0.1    0.1     0.1    0.1
-            search.searchSub.step.(...)                   AI.Search                 src\AI\Search.hs:48:13-56                       620     354574    0.0    0.0     0.1    0.1
-             search.searchSub.step.updateAlphaBeta        AI.Search                 src\AI\Search.hs:(40,13)-(47,45)                621     354574    0.1    0.1     0.1    0.1
-            search.searchSub.step.result                  AI.Search                 src\AI\Search.hs:52:13-118                      617     354574    0.0    0.0     0.0    0.0
-            search.searchSub.step.stopSearch              AI.Search                 src\AI\Search.hs:38:13-86                       618     354574    0.0    0.0     0.0    0.0
-            search.searchSub.step.subBs                   AI.Search                 src\AI\Search.hs:33:13-50                       624     354574    0.0    0.0    96.1   97.4
-             update                                       AI.State.Board.Internal   src\AI\State\Board\Internal.hs:(68,1)-(83,40)   625     354574    0.9    0.5    96.1   97.3
-              update.(...)                                AI.State.Board.Internal   src\AI\State\Board\Internal.hs:71:5-24          642     354574    0.0    0.0     0.3    0.2
-               getSize                                    Data.Array.Utils.Internal src\Data\Array\Utils\Internal.hs:(16,1)-(18,23) 643     354574    0.2    0.2     0.2    0.2
-                getSize.(...)                             Data.Array.Utils.Internal src\Data\Array\Utils\Internal.hs:17:5-28        645     354574    0.0    0.0     0.0    0.0
-                getSize.h'                                Data.Array.Utils.Internal src\Data\Array\Utils\Internal.hs:17:5-28        647     354574    0.0    0.0     0.0    0.0
-                getSize.w'                                Data.Array.Utils.Internal src\Data\Array\Utils\Internal.hs:17:5-28        644     354574    0.0    0.0     0.0    0.0
-              update.(...)                                AI.State.Board.Internal   src\AI\State\Board\Internal.hs:69:5-43          626     354574    0.0    0.0     0.0    0.0
-              update.deltaScore                           AI.State.Board.Internal   src\AI\State\Board\Internal.hs:70:5-30          628     354574    0.1    0.0     0.1    0.0
-              update.emptyPoses                           AI.State.Board.Internal   src\AI\State\Board\Internal.hs:77:5-74          650     354574    1.4    2.5     4.3    2.5
-               update.emptyPoses.\                        AI.State.Board.Internal   src\AI\State\Board\Internal.hs:77:34-62         651   11342862    2.8    0.0     2.8    0.0
-                getBoardElem                              AI.State.Board.Internal   src\AI\State\Board\Internal.hs:25:1-26          652   11342862    0.0    0.0     0.0    0.0
-              update.h                                    AI.State.Board.Internal   src\AI\State\Board\Internal.hs:71:5-24          646     354574    0.0    0.0     0.0    0.0
-              update.nChoices                             AI.State.Board.Internal   src\AI\State\Board\Internal.hs:82:5-53          653     354574    1.2    2.8    42.0   30.8
-               update.updateChoices                       AI.State.Board.Internal   src\AI\State\Board\Internal.hs:(79,5)-(81,71)   654    9920490    2.4    7.2    40.8   28.0
-                update.updateChoices.updateSub            AI.State.Board.Internal   src\AI\State\Board\Internal.hs:81:9-71          657    3309153    1.2    0.8    38.4   20.8
-                 updateSortedList                         AI.State.Board.PosScore   src\AI\State\Board\PosScore.hs:26:1-51          658    3309153    9.0    9.8    35.9   18.5
-                  ==                                      AI.State.Board.PosScore   src\AI\State\Board\PosScore.hs:14:5-35          663   18620784    0.8    0.0     0.8    0.0
-                   pos                                    AI.State.Board.PosScore   src\AI\State\Board\PosScore.hs:8:21-23          664   37241568    0.0    0.0     0.0    0.0
-                  compare                                 AI.State.Board.PosScore   src\AI\State\Board\PosScore.hs:(17,5)-(20,32)   665   17844092    2.5    5.0    26.0    8.8
-                   toScores                               AI.State.Board.PosScore   src\AI\State\Board\PosScore.hs:11:1-48          668   35688184   10.2    3.8    22.9    3.8
-                    chess                                 AI.State.Board.PosScore   src\AI\State\Board\PosScore.hs:8:57-61          669   35688184    0.0    0.0     0.0    0.0
-                    pos                                   AI.State.Board.PosScore   src\AI\State\Board\PosScore.hs:8:21-23          674   35688184    0.0    0.0     0.0    0.0
-                    scores                                AI.State.Board.PosScore   src\AI\State\Board\PosScore.hs:8:33-38          670   35688184    3.5    0.0    12.7    0.0
+        search.all                                        AI.Search                 src\AI\Search.hs:14:5-63                        375         10    0.0    0.0    99.4   99.4
+         search.searchSub                                 AI.Search                 src\AI\Search.hs:(17,5)-(53,90)                 376    1369421    0.2    0.1    99.4   99.4
+          score                                           AI.State.Board.Internal   src\AI\State\Board\Internal.hs:20:23-27         714     977737    0.0    0.0     0.0    0.0
+          search.searchSub.r                              AI.Search                 src\AI\Search.hs:(27,9)-(29,19)                 377     391684    0.0    0.0     0.0    0.0
+           score                                          AI.State.Board.Internal   src\AI\State\Board\Internal.hs:20:23-27         378     431866    0.0    0.0     0.0    0.0
+          search.searchSub.(...)                          AI.Search                 src\AI\Search.hs:(23,9)-(26,30)                 715     351502    0.1    0.0     0.1    0.0
+          search.searchSub.r_                             AI.Search                 src\AI\Search.hs:(23,9)-(26,30)                 718     351502    0.0    0.0     0.0    0.0
+          search.searchSub.scanResult                     AI.Search                 src\AI\Search.hs:20:9-113                       381     351502    0.4    0.3    98.1   99.1
+           search.searchSub.step                          AI.Search                 src\AI\Search.hs:(31,9)-(53,90)                 616    1369411    0.7    0.7    97.7   98.8
+            search.searchSub.step.(...)                   AI.Search                 src\AI\Search.hs:36:13-87                       623    1369411    0.1    0.1     0.1    0.1
+            search.searchSub.step.(...)                   AI.Search                 src\AI\Search.hs:48:13-56                       620    1369411    0.0    0.0     0.1    0.1
+             search.searchSub.step.updateAlphaBeta        AI.Search                 src\AI\Search.hs:(40,13)-(47,45)                621    1369411    0.1    0.1     0.1    0.1
+            search.searchSub.step.result                  AI.Search                 src\AI\Search.hs:52:13-118                      617    1369411    0.1    0.0     0.1    0.0
+            search.searchSub.step.stopSearch              AI.Search                 src\AI\Search.hs:38:13-86                       618    1369411    0.1    0.0     0.1    0.0
+            search.searchSub.step.subBs                   AI.Search                 src\AI\Search.hs:33:13-50                       624    1369411    0.0    0.0    96.6   98.0
+             update                                       AI.State.Board.Internal   src\AI\State\Board\Internal.hs:(68,1)-(83,40)   625    1369411    1.0    0.5    96.6   98.0
+              update.(...)                                AI.State.Board.Internal   src\AI\State\Board\Internal.hs:71:5-24          642    1369411    0.0    0.0     0.3    0.2
+               getSize                                    Data.Array.Utils.Internal src\Data\Array\Utils\Internal.hs:(16,1)-(18,23) 643    1369411    0.2    0.2     0.2    0.2
+                getSize.(...)                             Data.Array.Utils.Internal src\Data\Array\Utils\Internal.hs:17:5-28        645    1369411    0.0    0.0     0.0    0.0
+                getSize.h'                                Data.Array.Utils.Internal src\Data\Array\Utils\Internal.hs:17:5-28        647    1369411    0.0    0.0     0.0    0.0
+                getSize.w'                                Data.Array.Utils.Internal src\Data\Array\Utils\Internal.hs:17:5-28        644    1369411    0.0    0.0     0.0    0.0
+              update.(...)                                AI.State.Board.Internal   src\AI\State\Board\Internal.hs:69:5-43          626    1369411    0.0    0.0     0.0    0.0
+              update.deltaScore                           AI.State.Board.Internal   src\AI\State\Board\Internal.hs:70:5-30          628    1369411    0.1    0.0     0.1    0.0
+              update.emptyPoses                           AI.State.Board.Internal   src\AI\State\Board\Internal.hs:77:5-74          650    1369411    1.5    2.6     4.3    2.6
+               update.emptyPoses.\                        AI.State.Board.Internal   src\AI\State\Board\Internal.hs:77:34-62         651   43778108    2.9    0.0     2.9    0.0
+                getBoardElem                              AI.State.Board.Internal   src\AI\State\Board\Internal.hs:25:1-26          652   43778108    0.0    0.0     0.0    0.0
+              update.h                                    AI.State.Board.Internal   src\AI\State\Board\Internal.hs:71:5-24          646    1369411    0.0    0.0     0.0    0.0
+              update.nChoices                             AI.State.Board.Internal   src\AI\State\Board\Internal.hs:82:5-53          653    1369411    1.2    2.9    42.9   30.6
+               update.updateChoices                       AI.State.Board.Internal   src\AI\State\Board\Internal.hs:(79,5)-(81,71)   654   38390002    2.5    7.3    41.7   27.7
+                update.updateChoices.updateSub            AI.State.Board.Internal   src\AI\State\Board\Internal.hs:81:9-71          657   12491178    1.0    0.8    39.2   20.4
+                 updateSortedList                         AI.State.Board.PosScore   src\AI\State\Board\PosScore.hs:26:1-51          658   12491178    8.8    9.6    37.3   18.2
+                  ==                                      AI.State.Board.PosScore   src\AI\State\Board\PosScore.hs:14:5-35          663   69023562    1.0    0.0     1.0    0.0
+                   pos                                    AI.State.Board.PosScore   src\AI\State\Board\PosScore.hs:8:21-23          664  138047124    0.0    0.0     0.0    0.0
+                  compare                                 AI.State.Board.PosScore   src\AI\State\Board\PosScore.hs:(17,5)-(20,32)   665   65675177    2.4    4.9    27.5    8.6
+                   toScores                               AI.State.Board.PosScore   src\AI\State\Board\PosScore.hs:11:1-48          668  131350354   10.5    3.7    24.5    3.7
+                    chess                                 AI.State.Board.PosScore   src\AI\State\Board\PosScore.hs:8:57-61          669  131350354    0.0    0.0     0.0    0.0
+                    pos                                   AI.State.Board.PosScore   src\AI\State\Board\PosScore.hs:8:21-23          674  131350354    0.0    0.0     0.0    0.0
+                    scores                                AI.State.Board.PosScore   src\AI\State\Board\PosScore.hs:8:33-38          670  131350354    4.1    0.0    14.0    0.0
                      empty                                AI.State.Board.Internal   src\AI\State\Board\Internal.hs:(35,1)-(39,103)  704          0    0.0    0.0     0.0    0.0
                       empty.choice                        AI.State.Board.Internal   src\AI\State\Board\Internal.hs:39:5-103         705          0    0.0    0.0     0.0    0.0
                        empty.choice.\                     AI.State.Board.Internal   src\AI\State\Board\Internal.hs:39:37-94         706          0    0.0    0.0     0.0    0.0
                         empty.choice.\.\                  AI.State.Board.Internal   src\AI\State\Board\Internal.hs:39:50-73         707          0    0.0    0.0     0.0    0.0
                          genPosScore                      AI.State.Board.Internal   src\AI\State\Board\Internal.hs:(121,1)-(123,37) 708          0    0.0    0.0     0.0    0.0
                           genPosScore.scoresFunc          AI.State.Board.Internal   src\AI\State\Board\Internal.hs:123:5-37         709          0    0.0    0.0     0.0    0.0
-                           toScoresMap                    AI.State.Board.Internal   src\AI\State\Board\Internal.hs:31:1-27          710       5513    0.0    0.0     0.0    0.0
-                     genPosScore                          AI.State.Board.Internal   src\AI\State\Board\Internal.hs:(121,1)-(123,37) 672          0    0.9    0.0     9.2    0.0
-                      genPosScore.scoresFunc              AI.State.Board.Internal   src\AI\State\Board\Internal.hs:123:5-37         673          0    8.3    0.0     8.3    0.0
-                       toScoresMap                        AI.State.Board.Internal   src\AI\State\Board\Internal.hs:31:1-27          677   33232197    0.0    0.0     0.0    0.0
+                           toScoresMap                    AI.State.Board.Internal   src\AI\State\Board\Internal.hs:31:1-27          710       6162    0.0    0.0     0.0    0.0
+                     genPosScore                          AI.State.Board.Internal   src\AI\State\Board\Internal.hs:(121,1)-(123,37) 672          0    0.8    0.0     9.8    0.0
+                      genPosScore.scoresFunc              AI.State.Board.Internal   src\AI\State\Board\Internal.hs:123:5-37         673          0    9.0    0.0     9.0    0.0
+                       toScoresMap                        AI.State.Board.Internal   src\AI\State\Board\Internal.hs:31:1-27          677  129542930    0.0    0.0     0.0    0.0
                      playSelf.step.nextState              Game                      src\Game.hs:20:9-50                             801          0    0.0    0.0     0.0    0.0
-                   chess                                  AI.State.Board.PosScore   src\AI\State\Board\PosScore.hs:8:57-61          666   17844092    0.0    0.0     0.0    0.0
-                   compare.comp                           AI.State.Board.PosScore   src\AI\State\Board\PosScore.hs:(18,9)-(20,32)   667   17844092    0.6    0.0     0.6    0.0
-                 genPosScore                              AI.State.Board.Internal   src\AI\State\Board\Internal.hs:(121,1)-(123,37) 662    2722237    0.9    1.4     1.3    1.4
-                  genPosScore.scoresFunc                  AI.State.Board.Internal   src\AI\State\Board\Internal.hs:123:5-37         671    2722237    0.5    0.0     0.5    0.0
-                   toScoresMap                            AI.State.Board.Internal   src\AI\State\Board\Internal.hs:31:1-27          802    2450474    0.0    0.0     0.0    0.0
-              update.ndUdtPoses                           AI.State.Board.Internal   src\AI\State\Board\Internal.hs:72:5-46          631     354574    0.0    0.0    13.2   22.5
-               aroundDirPosesInEdge                       AI.State.Board.Dir        src\AI\State\Board\Dir.hs:(34,1)-(40,31)        632     354574    1.7    2.9    13.1   22.5
-                aroundDirPosesInEdge.inEdge               AI.State.Board.Dir        src\AI\State\Board\Dir.hs:36:5-62               636   11346368    1.9    0.0     2.4    0.0
-                 aroundDirPosesInEdge.between             AI.State.Board.Dir        src\AI\State\Board\Dir.hs:35:5-44               640   22691461    0.5    0.0     0.5    0.0
-                aroundDirPosesInEdge.unFiltered           AI.State.Board.Dir        src\AI\State\Board\Dir.hs:(38,5)-(39,18)        633     354574    1.1    3.0     9.0   19.5
-                 aroundDirPosesInEdge.unFiltered.\        AI.State.Board.Dir        src\AI\State\Board\Dir.hs:39:9-18               634    1418296    0.1    0.0     8.0   16.5
-                  dirSeq                                  AI.State.Board.Dir        src\AI\State\Board\Dir.hs:(20,1)-(21,27)        635    1418296    1.7    4.6     7.9   16.5
-                   dirSeq.\                               AI.State.Board.Dir        src\AI\State\Board\Dir.hs:21:5-27               637   11346368    2.7    6.0     6.1   11.9
-                    pAdd                                  AI.State.Board.Vector     src\AI\State\Board\Vector.hs:13:1-17            638          0    0.4    0.0     3.4    6.0
-                     doPos2                               AI.State.Board.Vector     src\AI\State\Board\Vector.hs:7:1-47             639   11346368    3.0    6.0     3.0    6.0
-              update.nsts                                 AI.State.Board.Internal   src\AI\State\Board\Internal.hs:76:5-98          629     354574    4.0    4.8     4.0    4.8
-              update.scoreMap                             AI.State.Board.Internal   src\AI\State\Board\Internal.hs:69:5-43          627     354574    0.0    0.0     0.0    0.0
-              update.udtAsFuncs                           AI.State.Board.Internal   src\AI\State\Board\Internal.hs:75:5-110         630     354574    2.2    4.5    31.5   36.0
-               update.udtAsFuncs.\                        AI.State.Board.Internal   src\AI\State\Board\Internal.hs:75:49-110        648   11342862    1.6    6.0    29.4   31.5
-                mapAsUdtStates                            AI.State.Board.Internal   src\AI\State\Board\Internal.hs:105:1-45         649   11342862    1.1    1.9    27.7   25.6
-                 udtStatesBase                            AI.State.Board.Internal   src\AI\State\Board\Internal.hs:(98,1)-(102,27)  675    2995475    0.7    0.3     8.6    6.5
-                  udtStatesBase.(...)                     AI.State.Board.Internal   src\AI\State\Board\Internal.hs:99:5-51          682    2722237    0.1    0.0     3.8    3.7
-                   relativeDirLength                      AI.State.Board.Dir        src\AI\State\Board\Dir.hs:(24,1)-(31,25)        683    2722237    1.4    2.4     3.7    3.7
-                    relativeDirLength.\                   AI.State.Board.Dir        src\AI\State\Board\Dir.hs:(26,49)-(31,25)       684    6864145    0.9    0.0     1.9    1.0
-                     vecLen                               AI.State.Board.Vector     src\AI\State\Board\Vector.hs:(25,1)-(30,39)     686    6864145    0.8    0.8     0.8    0.8
-                     relativeDirLength.\.pos              AI.State.Board.Dir        src\AI\State\Board\Dir.hs:(28,13)-(30,30)       691    2722237    0.3    0.2     0.3    0.2
-                    relativeDirLength.d                   AI.State.Board.Dir        src\AI\State\Board\Dir.hs:25:5-24               685    2722237    0.4    0.4     0.4    0.4
-                  udtStatesBase.dir                       AI.State.Board.Internal   src\AI\State\Board\Internal.hs:99:5-51          687    2722237    0.0    0.0     0.0    0.0
-                  udtStatesBase.fds                       AI.State.Board.Internal   src\AI\State\Board\Internal.hs:101:5-47         688    2722237    2.4    2.1     4.0    2.4
-                   compare                                AI.State.Board.Dir        src\AI\State\Board\Dir.hs:7:72-74               689    5407807    0.0    0.0     0.0    0.0
-                   stateTrans                             AI.State.Internal         src\AI\State\Internal.hs:(47,1)-(51,41)         692    2722237    0.8    0.2     1.6    0.4
-                    stateTrans.diff                       AI.State.Internal         src\AI\State\Internal.hs:50:5-17                697    2722237    0.0    0.0     0.0    0.0
-                    stateTrans.divValue                   AI.State.Internal         src\AI\State\Internal.hs:48:5-30                694    2722237    0.3    0.2     0.3    0.2
-                    stateTrans.lc                         AI.State.Internal         src\AI\State\Internal.hs:49:5-43                695    2722237    0.5    0.0     0.5    0.0
-                     toInt                                AI.State.Internal         src\AI\State\Internal.hs:16:1-16                696    2722237    0.0    0.0     0.0    0.0
-                    toInt                                 AI.State.Internal         src\AI\State\Internal.hs:16:1-16                693    2722237    0.0    0.0     0.0    0.0
-                  udtStatesBase.statePos                  AI.State.Board.Internal   src\AI\State\Board\Internal.hs:99:5-51          690    2722237    0.0    0.0     0.0    0.0
-                 update.scoreTrans                        AI.State.Board.Internal   src\AI\State\Board\Internal.hs:73:5-73          676    2995475    0.2    0.4    18.0   17.2
-                  deltaScoreCombine                       AI.State.Board.Internal   src\AI\State\Board\Internal.hs:64:1-127         678    2722237    1.2    3.8    17.8   16.8
-                   deltaScoreCombine.\                    AI.State.Board.Internal   src\AI\State\Board\Internal.hs:64:58-127        679    3309153    1.4    0.6    16.5   13.0
-                    chessRltSign                          AI.State.Board.Internal   src\AI\State\Board\Internal.hs:(91,1)-(94,30)   703    3309153    0.0    0.0     0.0    0.0
-                    dirStatesTransScore                   AI.State.Board.Internal   src\AI\State\Board\Internal.hs:(58,1)-(61,22)   680    3309153    0.7    0.2    14.4   12.2
-                     dirStatesTransScore.deltaScores      AI.State.Board.Internal   src\AI\State\Board\Internal.hs:60:5-49          681    3309153    3.6    6.4    13.7   12.0
-                      dirStatesTransScore.deltaStateScore AI.State.Board.Internal   src\AI\State\Board\Internal.hs:59:5-68          698   13236612    2.0    0.9    10.1    5.6
-                       stateScore                         AI.State.Internal         src\AI\State\Internal.hs:79:1-63                699   26473224    5.3    4.6     8.0    4.6
-                        chessToScore                      AI.State.Internal         src\AI\State\Internal.hs:70:1-27                700   26473224    2.7    0.0     2.7    0.0
-                    locationScore                         AI.State.Board.Internal   src\AI\State\Board\Internal.hs:(86,1)-(88,28)   701    2722237    0.6    0.2     0.7    0.2
-                     locationScore.score                  AI.State.Board.Internal   src\AI\State\Board\Internal.hs:87:5-33          702    5444474    0.1    0.0     0.1    0.0
-              update.w                                    AI.State.Board.Internal   src\AI\State\Board\Internal.hs:71:5-24          641     354574    0.0    0.0     0.0    0.0
-            search.searchSub.step.subScore                AI.Search                 src\AI\Search.hs:36:13-87                       622     354574    0.0    0.0     0.0    0.0
-            search.searchSub.step.updated                 AI.Search                 src\AI\Search.hs:48:13-56                       716     348954    0.0    0.0     0.0    0.0
-            search.searchSub.step.alphaBeta               AI.Search                 src\AI\Search.hs:48:13-56                       619     258392    0.0    0.0     0.0    0.0
-            search.searchSub.step.replaced                AI.Search                 src\AI\Search.hs:50:13-53                       717      96182    0.0    0.0     0.0    0.0
+                   chess                                  AI.State.Board.PosScore   src\AI\State\Board\PosScore.hs:8:57-61          666   65675177    0.0    0.0     0.0    0.0
+                   compare.comp                           AI.State.Board.PosScore   src\AI\State\Board\PosScore.hs:(18,9)-(20,32)   667   65675177    0.6    0.0     0.6    0.0
+                 genPosScore                              AI.State.Board.Internal   src\AI\State\Board\Internal.hs:(121,1)-(123,37) 662    9960217    0.8    1.4     0.9    1.4
+                  genPosScore.scoresFunc                  AI.State.Board.Internal   src\AI\State\Board\Internal.hs:123:5-37         671    9960217    0.1    0.0     0.1    0.0
+                   toScoresMap                            AI.State.Board.Internal   src\AI\State\Board\Internal.hs:31:1-27          802    1801262    0.0    0.0     0.0    0.0
+              update.ndUdtPoses                           AI.State.Board.Internal   src\AI\State\Board\Internal.hs:72:5-46          631    1369411    0.0    0.0    13.0   23.1
+               aroundDirPosesInEdge                       AI.State.Board.Dir        src\AI\State\Board\Dir.hs:(34,1)-(40,31)        632    1369411    1.5    3.0    13.0   23.1
+                aroundDirPosesInEdge.inEdge               AI.State.Board.Dir        src\AI\State\Board\Dir.hs:36:5-62               636   43821152    1.8    0.1     2.3    0.1
+                 aroundDirPosesInEdge.between             AI.State.Board.Dir        src\AI\State\Board\Dir.hs:35:5-44               640   87617098    0.5    0.0     0.5    0.0
+                aroundDirPosesInEdge.unFiltered           AI.State.Board.Dir        src\AI\State\Board\Dir.hs:(38,5)-(39,18)        633    1369411    1.2    3.1     9.2   20.1
+                 aroundDirPosesInEdge.unFiltered.\        AI.State.Board.Dir        src\AI\State\Board\Dir.hs:39:9-18               634    5477644    0.1    0.0     8.0   17.0
+                  dirSeq                                  AI.State.Board.Dir        src\AI\State\Board\Dir.hs:(20,1)-(21,27)        635    5477644    1.8    4.7     7.9   17.0
+                   dirSeq.\                               AI.State.Board.Dir        src\AI\State\Board\Dir.hs:21:5-27               637   43821152    2.9    6.1     6.1   12.3
+                    pAdd                                  AI.State.Board.Vector     src\AI\State\Board\Vector.hs:13:1-17            638          0    0.2    0.0     3.1    6.1
+                     doPos2                               AI.State.Board.Vector     src\AI\State\Board\Vector.hs:7:1-47             639   43821152    2.9    6.1     2.9    6.1
+              update.nsts                                 AI.State.Board.Internal   src\AI\State\Board\Internal.hs:76:5-98          629    1369411    4.3    4.9     4.3    4.9
+              update.scoreMap                             AI.State.Board.Internal   src\AI\State\Board\Internal.hs:69:5-43          627    1369411    0.0    0.0     0.0    0.0
+              update.udtAsFuncs                           AI.State.Board.Internal   src\AI\State\Board\Internal.hs:75:5-110         630    1369411    2.2    4.6    30.5   36.0
+               update.udtAsFuncs.\                        AI.State.Board.Internal   src\AI\State\Board\Internal.hs:75:49-110        648   43778108    1.6    6.1    28.3   31.4
+                mapAsUdtStates                            AI.State.Board.Internal   src\AI\State\Board\Internal.hs:105:1-45         649   43778108    1.1    1.8    26.7   25.3
+                 udtStatesBase                            AI.State.Board.Internal   src\AI\State\Board\Internal.hs:(98,1)-(102,27)  675   10951827    0.6    0.3     8.3    6.3
+                  udtStatesBase.(...)                     AI.State.Board.Internal   src\AI\State\Board\Internal.hs:99:5-51          682    9960217    0.2    0.0     3.6    3.6
+                   relativeDirLength                      AI.State.Board.Dir        src\AI\State\Board\Dir.hs:(24,1)-(31,25)        683    9960217    1.2    2.3     3.5    3.6
+                    relativeDirLength.\                   AI.State.Board.Dir        src\AI\State\Board\Dir.hs:(26,49)-(31,25)       684   25084354    0.8    0.0     1.8    0.9
+                     vecLen                               AI.State.Board.Vector     src\AI\State\Board\Vector.hs:(25,1)-(30,39)     686   25084354    0.8    0.7     0.8    0.7
+                     relativeDirLength.\.pos              AI.State.Board.Dir        src\AI\State\Board\Dir.hs:(28,13)-(30,30)       691    9960217    0.2    0.2     0.2    0.2
+                    relativeDirLength.d                   AI.State.Board.Dir        src\AI\State\Board\Dir.hs:25:5-24               685    9960217    0.4    0.4     0.4    0.4
+                  udtStatesBase.dir                       AI.State.Board.Internal   src\AI\State\Board\Internal.hs:99:5-51          687    9960217    0.0    0.0     0.0    0.0
+                  udtStatesBase.fds                       AI.State.Board.Internal   src\AI\State\Board\Internal.hs:101:5-47         688    9960217    2.5    2.0     4.1    2.4
+                   compare                                AI.State.Board.Dir        src\AI\State\Board\Dir.hs:7:72-74               689   19843696    0.0    0.0     0.0    0.0
+                   stateTrans                             AI.State.Internal         src\AI\State\Internal.hs:(47,1)-(51,41)         692    9960217    0.8    0.2     1.5    0.3
+                    stateTrans.diff                       AI.State.Internal         src\AI\State\Internal.hs:50:5-17                697    9960217    0.0    0.0     0.0    0.0
+                    stateTrans.divValue                   AI.State.Internal         src\AI\State\Internal.hs:48:5-30                694    9960217    0.3    0.2     0.3    0.2
+                    stateTrans.lc                         AI.State.Internal         src\AI\State\Internal.hs:49:5-43                695    9960217    0.4    0.0     0.4    0.0
+                     toInt                                AI.State.Internal         src\AI\State\Internal.hs:16:1-16                696    9960217    0.0    0.0     0.0    0.0
+                    toInt                                 AI.State.Internal         src\AI\State\Internal.hs:16:1-16                693    9960217    0.0    0.0     0.0    0.0
+                  udtStatesBase.statePos                  AI.State.Board.Internal   src\AI\State\Board\Internal.hs:99:5-51          690    9960217    0.0    0.0     0.0    0.0
+                 update.scoreTrans                        AI.State.Board.Internal   src\AI\State\Board\Internal.hs:73:5-73          676   10951827    0.2    0.4    17.3   17.1
+                  deltaScoreCombine                       AI.State.Board.Internal   src\AI\State\Board\Internal.hs:64:1-127         678    9960217    1.0    3.7    17.1   16.8
+                   deltaScoreCombine.\                    AI.State.Board.Internal   src\AI\State\Board\Internal.hs:64:58-127        679   12491178    1.4    0.6    16.1   13.0
+                    chessRltSign                          AI.State.Board.Internal   src\AI\State\Board\Internal.hs:(91,1)-(94,30)   703   12491178    0.0    0.0     0.0    0.0
+                    dirStatesTransScore                   AI.State.Board.Internal   src\AI\State\Board\Internal.hs:(58,1)-(61,22)   680   12491178    0.7    0.2    14.0   12.2
+                     dirStatesTransScore.deltaScores      AI.State.Board.Internal   src\AI\State\Board\Internal.hs:60:5-49          681   12491178    3.4    6.4    13.3   12.0
+                      dirStatesTransScore.deltaStateScore AI.State.Board.Internal   src\AI\State\Board\Internal.hs:59:5-68          698   49964712    2.0    0.9     9.9    5.6
+                       stateScore                         AI.State.Internal         src\AI\State\Internal.hs:79:1-63                699   99929424    5.4    4.7     7.9    4.7
+                        chessToScore                      AI.State.Internal         src\AI\State\Internal.hs:70:1-27                700   99929424    2.6    0.0     2.6    0.0
+                    locationScore                         AI.State.Board.Internal   src\AI\State\Board\Internal.hs:(86,1)-(88,28)   701    9960217    0.5    0.2     0.7    0.2
+                     locationScore.score                  AI.State.Board.Internal   src\AI\State\Board\Internal.hs:87:5-33          702   19920434    0.2    0.0     0.2    0.0
+              update.w                                    AI.State.Board.Internal   src\AI\State\Board\Internal.hs:71:5-24          641    1369411    0.0    0.0     0.0    0.0
+            search.searchSub.step.subScore                AI.Search                 src\AI\Search.hs:36:13-87                       622    1369411    0.1    0.0     0.1    0.0
+            search.searchSub.step.updated                 AI.Search                 src\AI\Search.hs:48:13-56                       716    1344756    0.0    0.0     0.0    0.0
+            search.searchSub.step.alphaBeta               AI.Search                 src\AI\Search.hs:48:13-56                       619    1017909    0.0    0.0     0.0    0.0
+            search.searchSub.step.replaced                AI.Search                 src\AI\Search.hs:50:13-53                       717     351502    0.0    0.0     0.0    0.0
             search.searchSub.step.resultPosElems          AI.Search                 src\AI\Search.hs:49:13-53                       719         10    0.0    0.0     0.0    0.0
-          search.searchSub.searchedPoses                  AI.Search                 src\AI\Search.hs:19:9-52                        384      96182    0.0    0.0     0.6    0.1
-           chessBest                                      AI.State.Board.Internal   src\AI\State\Board\Internal.hs:126:1-123        385      96182    0.5    0.1     0.6    0.1
-            chessBest.\                                   AI.State.Board.Internal   src\AI\State\Board\Internal.hs:126:53-87        612     459127    0.1    0.0     0.1    0.0
-             getBoardElem                                 AI.State.Board.Internal   src\AI\State\Board\Internal.hs:25:1-26          613     459127    0.0    0.0     0.0    0.0
-             states                                       AI.State.Board.Internal   src\AI\State\Board\Internal.hs:20:38-43         614     459127    0.0    0.0     0.0    0.0
-            pos                                           AI.State.Board.PosScore   src\AI\State\Board\PosScore.hs:8:21-23          615     459127    0.0    0.0     0.0    0.0
-            bestChoice                                    AI.State.Board.Internal   src\AI\State\Board\Internal.hs:20:61-70         386      96182    0.0    0.0     0.0    0.0
-          search.searchSub.stoped                         AI.Search                 src\AI\Search.hs:22:9-42                        382      96182    0.2    0.0     0.2    0.0
-           search.searchSub.stop                          AI.Search                 src\AI\Search.hs:21:9-30                        383     450756    0.0    0.0     0.0    0.0
+          search.searchSub.searchedPoses                  AI.Search                 src\AI\Search.hs:19:9-52                        384     351502    0.0    0.0     0.7    0.1
+           chessBest                                      AI.State.Board.Internal   src\AI\State\Board\Internal.hs:126:1-123        385     351502    0.6    0.1     0.7    0.1
+            chessBest.\                                   AI.State.Board.Internal   src\AI\State\Board\Internal.hs:126:53-87        612    1640178    0.1    0.0     0.1    0.0
+             getBoardElem                                 AI.State.Board.Internal   src\AI\State\Board\Internal.hs:25:1-26          613    1640178    0.0    0.0     0.0    0.0
+             states                                       AI.State.Board.Internal   src\AI\State\Board\Internal.hs:20:38-43         614    1640178    0.0    0.0     0.0    0.0
+            pos                                           AI.State.Board.PosScore   src\AI\State\Board\PosScore.hs:8:21-23          615    1640178    0.0    0.0     0.0    0.0
+            bestChoice                                    AI.State.Board.Internal   src\AI\State\Board\Internal.hs:20:61-70         386     351502    0.0    0.0     0.0    0.0
+          search.searchSub.stoped                         AI.Search                 src\AI\Search.hs:22:9-42                        382     351502    0.1    0.0     0.2    0.0
+           search.searchSub.stop                          AI.Search                 src\AI\Search.hs:21:9-30                        383    1720913    0.0    0.0     0.0    0.0
           search.searchSub.step                           AI.Search                 src\AI\Search.hs:(31,9)-(53,90)                 379          0    0.0    0.0     0.0    0.0
            search.searchSub.step.(...)                    AI.Search                 src\AI\Search.hs:36:13-87                       380          0    0.0    0.0     0.0    0.0
         search.resultPos                                  AI.Search                 src\AI\Search.hs:15:5-31                        720         10    0.0    0.0     0.0    0.0
@@ -210,29 +211,29 @@ MAIN                                                      MAIN                  
         update.h                                          AI.State.Board.Internal   src\AI\State\Board\Internal.hs:71:5-24          740         10    0.0    0.0     0.0    0.0
         update.nChoices                                   AI.State.Board.Internal   src\AI\State\Board\Internal.hs:82:5-53          747         10    0.0    0.0     0.0    0.0
          update.updateChoices                             AI.State.Board.Internal   src\AI\State\Board\Internal.hs:(79,5)-(81,71)   748        290    0.0    0.0     0.0    0.0
-          update.updateChoices.updateSub                  AI.State.Board.Internal   src\AI\State\Board\Internal.hs:81:9-71          750        526    0.0    0.0     0.0    0.0
-           updateSortedList                               AI.State.Board.PosScore   src\AI\State\Board\PosScore.hs:26:1-51          751        526    0.0    0.0     0.0    0.0
-            ==                                            AI.State.Board.PosScore   src\AI\State\Board\PosScore.hs:14:5-35          753       9067    0.0    0.0     0.0    0.0
-             pos                                          AI.State.Board.PosScore   src\AI\State\Board\PosScore.hs:8:21-23          754      18134    0.0    0.0     0.0    0.0
-            compare                                       AI.State.Board.PosScore   src\AI\State\Board\PosScore.hs:(17,5)-(20,32)   755       8267    0.0    0.0     0.0    0.0
-             toScores                                     AI.State.Board.PosScore   src\AI\State\Board\PosScore.hs:11:1-48          758      16534    0.0    0.0     0.0    0.0
-              chess                                       AI.State.Board.PosScore   src\AI\State\Board\PosScore.hs:8:57-61          759      16534    0.0    0.0     0.0    0.0
-              pos                                         AI.State.Board.PosScore   src\AI\State\Board\PosScore.hs:8:21-23          764      16534    0.0    0.0     0.0    0.0
-              scores                                      AI.State.Board.PosScore   src\AI\State\Board\PosScore.hs:8:33-38          760      16534    0.0    0.0     0.0    0.0
+          update.updateChoices.updateSub                  AI.State.Board.Internal   src\AI\State\Board\Internal.hs:81:9-71          750        524    0.0    0.0     0.0    0.0
+           updateSortedList                               AI.State.Board.PosScore   src\AI\State\Board\PosScore.hs:26:1-51          751        524    0.0    0.0     0.0    0.0
+            ==                                            AI.State.Board.PosScore   src\AI\State\Board\PosScore.hs:14:5-35          753       8512    0.0    0.0     0.0    0.0
+             pos                                          AI.State.Board.PosScore   src\AI\State\Board\PosScore.hs:8:21-23          754      17024    0.0    0.0     0.0    0.0
+            compare                                       AI.State.Board.PosScore   src\AI\State\Board\PosScore.hs:(17,5)-(20,32)   755       7684    0.0    0.0     0.0    0.0
+             toScores                                     AI.State.Board.PosScore   src\AI\State\Board\PosScore.hs:11:1-48          758      15368    0.0    0.0     0.0    0.0
+              chess                                       AI.State.Board.PosScore   src\AI\State\Board\PosScore.hs:8:57-61          759      15368    0.0    0.0     0.0    0.0
+              pos                                         AI.State.Board.PosScore   src\AI\State\Board\PosScore.hs:8:21-23          764      15368    0.0    0.0     0.0    0.0
+              scores                                      AI.State.Board.PosScore   src\AI\State\Board\PosScore.hs:8:33-38          760      15368    0.0    0.0     0.0    0.0
                empty                                      AI.State.Board.Internal   src\AI\State\Board\Internal.hs:(35,1)-(39,103)  794          0    0.0    0.0     0.0    0.0
                 empty.choice                              AI.State.Board.Internal   src\AI\State\Board\Internal.hs:39:5-103         795          0    0.0    0.0     0.0    0.0
                  empty.choice.\                           AI.State.Board.Internal   src\AI\State\Board\Internal.hs:39:37-94         796          0    0.0    0.0     0.0    0.0
                   empty.choice.\.\                        AI.State.Board.Internal   src\AI\State\Board\Internal.hs:39:50-73         797          0    0.0    0.0     0.0    0.0
                    genPosScore                            AI.State.Board.Internal   src\AI\State\Board\Internal.hs:(121,1)-(123,37) 798          0    0.0    0.0     0.0    0.0
                     genPosScore.scoresFunc                AI.State.Board.Internal   src\AI\State\Board\Internal.hs:123:5-37         799          0    0.0    0.0     0.0    0.0
-                     toScoresMap                          AI.State.Board.Internal   src\AI\State\Board\Internal.hs:31:1-27          800        428    0.0    0.0     0.0    0.0
+                     toScoresMap                          AI.State.Board.Internal   src\AI\State\Board\Internal.hs:31:1-27          800        427    0.0    0.0     0.0    0.0
                genPosScore                                AI.State.Board.Internal   src\AI\State\Board\Internal.hs:(121,1)-(123,37) 762          0    0.0    0.0     0.0    0.0
                 genPosScore.scoresFunc                    AI.State.Board.Internal   src\AI\State\Board\Internal.hs:123:5-37         763          0    0.0    0.0     0.0    0.0
-                 toScoresMap                              AI.State.Board.Internal   src\AI\State\Board\Internal.hs:31:1-27          767      16106    0.0    0.0     0.0    0.0
-             chess                                        AI.State.Board.PosScore   src\AI\State\Board\PosScore.hs:8:57-61          756       8267    0.0    0.0     0.0    0.0
-             compare.comp                                 AI.State.Board.PosScore   src\AI\State\Board\PosScore.hs:(18,9)-(20,32)   757       8267    0.0    0.0     0.0    0.0
-           genPosScore                                    AI.State.Board.Internal   src\AI\State\Board\Internal.hs:(121,1)-(123,37) 752        263    0.0    0.0     0.0    0.0
-            genPosScore.scoresFunc                        AI.State.Board.Internal   src\AI\State\Board\Internal.hs:123:5-37         761        263    0.0    0.0     0.0    0.0
+                 toScoresMap                              AI.State.Board.Internal   src\AI\State\Board\Internal.hs:31:1-27          767      14941    0.0    0.0     0.0    0.0
+             chess                                        AI.State.Board.PosScore   src\AI\State\Board\PosScore.hs:8:57-61          756       7684    0.0    0.0     0.0    0.0
+             compare.comp                                 AI.State.Board.PosScore   src\AI\State\Board\PosScore.hs:(18,9)-(20,32)   757       7684    0.0    0.0     0.0    0.0
+           genPosScore                                    AI.State.Board.Internal   src\AI\State\Board\Internal.hs:(121,1)-(123,37) 752        262    0.0    0.0     0.0    0.0
+            genPosScore.scoresFunc                        AI.State.Board.Internal   src\AI\State\Board\Internal.hs:123:5-37         761        262    0.0    0.0     0.0    0.0
         update.ndUdtPoses                                 AI.State.Board.Internal   src\AI\State\Board\Internal.hs:72:5-46          725         10    0.0    0.0     0.0    0.0
          aroundDirPosesInEdge                             AI.State.Board.Dir        src\AI\State\Board\Dir.hs:(34,1)-(40,31)        726         10    0.0    0.0     0.0    0.0
           aroundDirPosesInEdge.inEdge                     AI.State.Board.Dir        src\AI\State\Board\Dir.hs:36:5-62               730        320    0.0    0.0     0.0    0.0
@@ -249,33 +250,33 @@ MAIN                                                      MAIN                  
          update.udtAsFuncs.\                              AI.State.Board.Internal   src\AI\State\Board\Internal.hs:75:49-110        742        320    0.0    0.0     0.0    0.0
           mapAsUdtStates                                  AI.State.Board.Internal   src\AI\State\Board\Internal.hs:105:1-45         743        320    0.0    0.0     0.0    0.0
            udtStatesBase                                  AI.State.Board.Internal   src\AI\State\Board\Internal.hs:(98,1)-(102,27)  765        288    0.0    0.0     0.0    0.0
-            udtStatesBase.(...)                           AI.State.Board.Internal   src\AI\State\Board\Internal.hs:99:5-51          772        263    0.0    0.0     0.0    0.0
-             relativeDirLength                            AI.State.Board.Dir        src\AI\State\Board\Dir.hs:(24,1)-(31,25)        773        263    0.0    0.0     0.0    0.0
-              relativeDirLength.\                         AI.State.Board.Dir        src\AI\State\Board\Dir.hs:(26,49)-(31,25)       774        661    0.0    0.0     0.0    0.0
-               vecLen                                     AI.State.Board.Vector     src\AI\State\Board\Vector.hs:(25,1)-(30,39)     776        661    0.0    0.0     0.0    0.0
-               relativeDirLength.\.pos                    AI.State.Board.Dir        src\AI\State\Board\Dir.hs:(28,13)-(30,30)       781        263    0.0    0.0     0.0    0.0
-              relativeDirLength.d                         AI.State.Board.Dir        src\AI\State\Board\Dir.hs:25:5-24               775        263    0.0    0.0     0.0    0.0
-            udtStatesBase.dir                             AI.State.Board.Internal   src\AI\State\Board\Internal.hs:99:5-51          777        263    0.0    0.0     0.0    0.0
-            udtStatesBase.fds                             AI.State.Board.Internal   src\AI\State\Board\Internal.hs:101:5-47         778        263    0.0    0.0     0.0    0.0
-             compare                                      AI.State.Board.Dir        src\AI\State\Board\Dir.hs:7:72-74               779        521    0.0    0.0     0.0    0.0
-             stateTrans                                   AI.State.Internal         src\AI\State\Internal.hs:(47,1)-(51,41)         782        263    0.0    0.0     0.0    0.0
-              stateTrans.diff                             AI.State.Internal         src\AI\State\Internal.hs:50:5-17                787        263    0.0    0.0     0.0    0.0
-              stateTrans.divValue                         AI.State.Internal         src\AI\State\Internal.hs:48:5-30                784        263    0.0    0.0     0.0    0.0
-              stateTrans.lc                               AI.State.Internal         src\AI\State\Internal.hs:49:5-43                785        263    0.0    0.0     0.0    0.0
-               toInt                                      AI.State.Internal         src\AI\State\Internal.hs:16:1-16                786        263    0.0    0.0     0.0    0.0
-              toInt                                       AI.State.Internal         src\AI\State\Internal.hs:16:1-16                783        263    0.0    0.0     0.0    0.0
-            udtStatesBase.statePos                        AI.State.Board.Internal   src\AI\State\Board\Internal.hs:99:5-51          780        263    0.0    0.0     0.0    0.0
+            udtStatesBase.(...)                           AI.State.Board.Internal   src\AI\State\Board\Internal.hs:99:5-51          772        262    0.0    0.0     0.0    0.0
+             relativeDirLength                            AI.State.Board.Dir        src\AI\State\Board\Dir.hs:(24,1)-(31,25)        773        262    0.0    0.0     0.0    0.0
+              relativeDirLength.\                         AI.State.Board.Dir        src\AI\State\Board\Dir.hs:(26,49)-(31,25)       774        658    0.0    0.0     0.0    0.0
+               vecLen                                     AI.State.Board.Vector     src\AI\State\Board\Vector.hs:(25,1)-(30,39)     776        658    0.0    0.0     0.0    0.0
+               relativeDirLength.\.pos                    AI.State.Board.Dir        src\AI\State\Board\Dir.hs:(28,13)-(30,30)       781        262    0.0    0.0     0.0    0.0
+              relativeDirLength.d                         AI.State.Board.Dir        src\AI\State\Board\Dir.hs:25:5-24               775        262    0.0    0.0     0.0    0.0
+            udtStatesBase.dir                             AI.State.Board.Internal   src\AI\State\Board\Internal.hs:99:5-51          777        262    0.0    0.0     0.0    0.0
+            udtStatesBase.fds                             AI.State.Board.Internal   src\AI\State\Board\Internal.hs:101:5-47         778        262    0.0    0.0     0.0    0.0
+             compare                                      AI.State.Board.Dir        src\AI\State\Board\Dir.hs:7:72-74               779        526    0.0    0.0     0.0    0.0
+             stateTrans                                   AI.State.Internal         src\AI\State\Internal.hs:(47,1)-(51,41)         782        262    0.0    0.0     0.0    0.0
+              stateTrans.diff                             AI.State.Internal         src\AI\State\Internal.hs:50:5-17                787        262    0.0    0.0     0.0    0.0
+              stateTrans.divValue                         AI.State.Internal         src\AI\State\Internal.hs:48:5-30                784        262    0.0    0.0     0.0    0.0
+              stateTrans.lc                               AI.State.Internal         src\AI\State\Internal.hs:49:5-43                785        262    0.0    0.0     0.0    0.0
+               toInt                                      AI.State.Internal         src\AI\State\Internal.hs:16:1-16                786        262    0.0    0.0     0.0    0.0
+              toInt                                       AI.State.Internal         src\AI\State\Internal.hs:16:1-16                783        262    0.0    0.0     0.0    0.0
+            udtStatesBase.statePos                        AI.State.Board.Internal   src\AI\State\Board\Internal.hs:99:5-51          780        262    0.0    0.0     0.0    0.0
            update.scoreTrans                              AI.State.Board.Internal   src\AI\State\Board\Internal.hs:73:5-73          766        288    0.0    0.0     0.0    0.0
-            deltaScoreCombine                             AI.State.Board.Internal   src\AI\State\Board\Internal.hs:64:1-127         768        263    0.0    0.0     0.0    0.0
-             deltaScoreCombine.\                          AI.State.Board.Internal   src\AI\State\Board\Internal.hs:64:58-127        769        526    0.0    0.0     0.0    0.0
-              chessRltSign                                AI.State.Board.Internal   src\AI\State\Board\Internal.hs:(91,1)-(94,30)   793        526    0.0    0.0     0.0    0.0
-              dirStatesTransScore                         AI.State.Board.Internal   src\AI\State\Board\Internal.hs:(58,1)-(61,22)   770        526    0.0    0.0     0.0    0.0
-               dirStatesTransScore.deltaScores            AI.State.Board.Internal   src\AI\State\Board\Internal.hs:60:5-49          771        526    0.0    0.0     0.0    0.0
-                dirStatesTransScore.deltaStateScore       AI.State.Board.Internal   src\AI\State\Board\Internal.hs:59:5-68          788       2104    0.0    0.0     0.0    0.0
-                 stateScore                               AI.State.Internal         src\AI\State\Internal.hs:79:1-63                789       4208    0.0    0.0     0.0    0.0
-                  chessToScore                            AI.State.Internal         src\AI\State\Internal.hs:70:1-27                790       4208    0.0    0.0     0.0    0.0
-              locationScore                               AI.State.Board.Internal   src\AI\State\Board\Internal.hs:(86,1)-(88,28)   791        263    0.0    0.0     0.0    0.0
-               locationScore.score                        AI.State.Board.Internal   src\AI\State\Board\Internal.hs:87:5-33          792        526    0.0    0.0     0.0    0.0
+            deltaScoreCombine                             AI.State.Board.Internal   src\AI\State\Board\Internal.hs:64:1-127         768        262    0.0    0.0     0.0    0.0
+             deltaScoreCombine.\                          AI.State.Board.Internal   src\AI\State\Board\Internal.hs:64:58-127        769        524    0.0    0.0     0.0    0.0
+              chessRltSign                                AI.State.Board.Internal   src\AI\State\Board\Internal.hs:(91,1)-(94,30)   793        524    0.0    0.0     0.0    0.0
+              dirStatesTransScore                         AI.State.Board.Internal   src\AI\State\Board\Internal.hs:(58,1)-(61,22)   770        524    0.0    0.0     0.0    0.0
+               dirStatesTransScore.deltaScores            AI.State.Board.Internal   src\AI\State\Board\Internal.hs:60:5-49          771        524    0.0    0.0     0.0    0.0
+                dirStatesTransScore.deltaStateScore       AI.State.Board.Internal   src\AI\State\Board\Internal.hs:59:5-68          788       2096    0.0    0.0     0.0    0.0
+                 stateScore                               AI.State.Internal         src\AI\State\Internal.hs:79:1-63                789       4192    0.0    0.0     0.0    0.0
+                  chessToScore                            AI.State.Internal         src\AI\State\Internal.hs:70:1-27                790       4192    0.0    0.0     0.0    0.0
+              locationScore                               AI.State.Board.Internal   src\AI\State\Board\Internal.hs:(86,1)-(88,28)   791        262    0.0    0.0     0.0    0.0
+               locationScore.score                        AI.State.Board.Internal   src\AI\State\Board\Internal.hs:87:5-33          792        524    0.0    0.0     0.0    0.0
         update.w                                          AI.State.Board.Internal   src\AI\State\Board\Internal.hs:71:5-24          735         10    0.0    0.0     0.0    0.0
       playSelf.step.nextChess                             Game                      src\Game.hs:21:9-29                             749          9    0.0    0.0     0.0    0.0
      empty                                                AI.State.Board.Internal   src\AI\State\Board\Internal.hs:(35,1)-(39,103)  360          1    0.0    0.0     0.0    0.0
@@ -418,7 +419,7 @@ MAIN                                                      MAIN                  
    purePsPureSs.prefs                                     AI.Pattern.Internal       src\AI\Pattern\Internal.hs:106:5-26             480          0    0.0    0.0     0.0    0.0
     matchPrefix                                           AI.Pattern.Internal       src\AI\Pattern\Internal.hs:227:1-45             481          0    0.0    0.0     0.0    0.0
      matchTreeCase                                        AI.Pattern.Internal       src\AI\Pattern\Internal.hs:202:1-39             482          1    0.0    0.0     0.0    0.0
-      createTree                                          AI.Pattern.Internal       src\AI\Pattern\Internal.hs:(177,1)-(190,38)     483         80    0.0    0.0     0.0    0.0
+      createTree                                          AI.Pattern.Internal       src\AI\Pattern\Internal.hs:(177,1)-(190,38)     483         91    0.0    0.0     0.0    0.0
        createTree.(...)                                   AI.Pattern.Internal       src\AI\Pattern\Internal.hs:182:5-58             504         46    0.0    0.0     0.0    0.0
         psPatterns                                        AI.Pattern.Internal       src\AI\Pattern\Internal.hs:28:1-26              505          0    0.0    0.0     0.0    0.0
          psTuple                                          AI.Pattern.Internal       src\AI\Pattern\Internal.hs:25:1-36              506        214    0.0    0.0     0.0    0.0
@@ -426,7 +427,7 @@ MAIN                                                      MAIN                  
        createTree.emptyPs                                 AI.Pattern.Internal       src\AI\Pattern\Internal.hs:182:5-58             503         46    0.0    0.0     0.0    0.0
        createTree.emptySub                                AI.Pattern.Internal       src\AI\Pattern\Internal.hs:179:5-32             515         46    0.0    0.0     0.0    0.0
         createTree.subTree                                AI.Pattern.Internal       src\AI\Pattern\Internal.hs:181:5-69             516         46    0.0    0.0     0.0    0.0
-         createTree.append                                AI.Pattern.Internal       src\AI\Pattern\Internal.hs:(186,5)-(188,67)     530        158    0.0    0.0     0.0    0.0
+         createTree.append                                AI.Pattern.Internal       src\AI\Pattern\Internal.hs:(186,5)-(188,67)     530        181    0.0    0.0     0.0    0.0
          createTree.belongs                               AI.Pattern.Internal       src\AI\Pattern\Internal.hs:(183,5)-(184,58)     520         46    0.0    0.0     0.0    0.0
           createTree.belongs.\                            AI.Pattern.Internal       src\AI\Pattern\Internal.hs:184:9-58             522        180    0.0    0.0     0.0    0.0
            present                                        AI.Pattern.Internal       src\AI\Pattern\Internal.hs:(36,1)-(40,14)       523         30    0.0    0.0     0.0    0.0
@@ -440,15 +441,15 @@ MAIN                                                      MAIN                  
          createTree.cutHead                               AI.Pattern.Internal       src\AI\Pattern\Internal.hs:185:5-36             555          0    0.0    0.0     0.0    0.0
           mapPatterns                                     AI.Pattern.Internal       src\AI\Pattern\Internal.hs:46:1-61              556          4    0.0    0.0     0.0    0.0
        createTree.otherPs                                 AI.Pattern.Internal       src\AI\Pattern\Internal.hs:182:5-58             521         46    0.0    0.0     0.0    0.0
-       createTree.allySub                                 AI.Pattern.Internal       src\AI\Pattern\Internal.hs:180:5-30             537         33    0.0    0.0     0.0    0.0
-        createTree.subTree                                AI.Pattern.Internal       src\AI\Pattern\Internal.hs:181:5-69             538         33    0.0    0.0     0.0    0.0
-         createTree.append                                AI.Pattern.Internal       src\AI\Pattern\Internal.hs:(186,5)-(188,67)     548        259    0.0    0.0     0.0    0.0
-         createTree.belongs                               AI.Pattern.Internal       src\AI\Pattern\Internal.hs:(183,5)-(184,58)     540         33    0.0    0.0     0.0    0.0
-          createTree.belongs.\                            AI.Pattern.Internal       src\AI\Pattern\Internal.hs:184:9-58             541        176    0.0    0.0     0.0    0.0
-           present                                        AI.Pattern.Internal       src\AI\Pattern\Internal.hs:(36,1)-(40,14)       542         26    0.0    0.0     0.0    0.0
-            present.check                                 AI.Pattern.Internal       src\AI\Pattern\Internal.hs:(38,5)-(39,15)       547         26    0.0    0.0     0.0    0.0
-            present.n                                     AI.Pattern.Internal       src\AI\Pattern\Internal.hs:37:5-21              543         26    0.0    0.0     0.0    0.0
-             allyNode                                     AI.Pattern.Internal       src\AI\Pattern\Internal.hs:15:100-107           544         26    0.0    0.0     0.0    0.0
+       createTree.allySub                                 AI.Pattern.Internal       src\AI\Pattern\Internal.hs:180:5-30             537         44    0.0    0.0     0.0    0.0
+        createTree.subTree                                AI.Pattern.Internal       src\AI\Pattern\Internal.hs:181:5-69             538         44    0.0    0.0     0.0    0.0
+         createTree.append                                AI.Pattern.Internal       src\AI\Pattern\Internal.hs:(186,5)-(188,67)     548        314    0.0    0.0     0.0    0.0
+         createTree.belongs                               AI.Pattern.Internal       src\AI\Pattern\Internal.hs:(183,5)-(184,58)     540         44    0.0    0.0     0.0    0.0
+          createTree.belongs.\                            AI.Pattern.Internal       src\AI\Pattern\Internal.hs:184:9-58             541        180    0.0    0.0     0.0    0.0
+           present                                        AI.Pattern.Internal       src\AI\Pattern\Internal.hs:(36,1)-(40,14)       542         30    0.0    0.0     0.0    0.0
+            present.check                                 AI.Pattern.Internal       src\AI\Pattern\Internal.hs:(38,5)-(39,15)       547         30    0.0    0.0     0.0    0.0
+            present.n                                     AI.Pattern.Internal       src\AI\Pattern\Internal.hs:37:5-21              543         30    0.0    0.0     0.0    0.0
+             allyNode                                     AI.Pattern.Internal       src\AI\Pattern\Internal.hs:15:100-107           544         30    0.0    0.0     0.0    0.0
          present                                          AI.Pattern.Internal       src\AI\Pattern\Internal.hs:(36,1)-(40,14)       550         22    0.0    0.0     0.0    0.0
           present.check                                   AI.Pattern.Internal       src\AI\Pattern\Internal.hs:(38,5)-(39,15)       553         22    0.0    0.0     0.0    0.0
           present.n                                       AI.Pattern.Internal       src\AI\Pattern\Internal.hs:37:5-21              551         22    0.0    0.0     0.0    0.0
@@ -457,89 +458,89 @@ MAIN                                                      MAIN                  
           mapPatterns                                     AI.Pattern.Internal       src\AI\Pattern\Internal.hs:46:1-61              549         34    0.0    0.0     0.0    0.0
        createTree.cutHead                                 AI.Pattern.Internal       src\AI\Pattern\Internal.hs:185:5-36             519          0    0.0    0.0     0.0    0.0
         mapPatterns                                       AI.Pattern.Internal       src\AI\Pattern\Internal.hs:46:1-61              531        142    0.0    0.0     0.0    0.0
- CAF:stateScores                                          AI.State.Internal         src\AI\State\Internal.hs:54:1-11                237          0    0.0    0.0     1.2    1.2
-  stateScores                                             AI.State.Internal         src\AI\State\Internal.hs:(54,1)-(55,65)         445          1    0.0    0.0     1.2    1.2
-   stateScores.\                                          AI.State.Internal         src\AI\State\Internal.hs:55:5-65                449       1038    0.0    0.0     1.2    1.2
-    placeCenterScore                                      AI.State.Internal         src\AI\State\Internal.hs:(58,1)-(63,8)          450       2694    0.0    0.0     1.2    1.2
-     placeCenterScore.(...)                               AI.State.Internal         src\AI\State\Internal.hs:62:5-29                457       2694    0.0    0.0     1.2    1.2
-      chessesJudge                                        AI.Pattern.Internal       src\AI\Pattern\Internal.hs:(70,1)-(73,35)       458       2694    0.0    0.0     1.2    1.2
-       chessesJudge.backward                              AI.Pattern.Internal       src\AI\Pattern\Internal.hs:72:5-40              562       2694    0.0    0.0     0.6    0.6
-        swapChessesJudgeSingle                            AI.Pattern.Internal       src\AI\Pattern\Internal.hs:(76,1)-(78,57)       563       2694    0.0    0.0     0.6    0.6
-         swapChessesJudgeSingle.ps                        AI.Pattern.Internal       src\AI\Pattern\Internal.hs:77:5-42              564       2694    0.0    0.0     0.6    0.6
-          swapC                                           AI.Pattern.Internal       src\AI\Pattern\Internal.hs:(81,1)-(83,11)       570      24246    0.0    0.0     0.0    0.0
-          chessesJudgeSingle                              AI.Pattern.Internal       src\AI\Pattern\Internal.hs:(90,1)-(92,72)       565       2694    0.0    0.0     0.6    0.6
-           chessesJudgeWithoutSplit                       AI.Pattern.Internal       src\AI\Pattern\Internal.hs:(95,1)-(101,56)      574      99915    0.1    0.1     0.5    0.6
-            chessesJudgeWithoutSplit.rs                   AI.Pattern.Internal       src\AI\Pattern\Internal.hs:98:5-32              575      64525    0.0    0.0     0.4    0.5
-             chessesJudgeWithoutSplit.f                   AI.Pattern.Internal       src\AI\Pattern\Internal.hs:97:5-59              589      94282    0.0    0.0     0.0    0.0
-             purePsPureSs                                 AI.Pattern.Internal       src\AI\Pattern\Internal.hs:(104,1)-(110,35)     576      64525    0.1    0.1     0.3    0.4
-              purePsPureSs.\                              AI.Pattern.Internal       src\AI\Pattern\Internal.hs:110:9-35             582     149021    0.1    0.1     0.1    0.1
-               purePsPureSs.\.\                           AI.Pattern.Internal       src\AI\Pattern\Internal.hs:110:29-35            586     211631    0.0    0.0     0.0    0.0
-              purePsPureSs.prefPs                         AI.Pattern.Internal       src\AI\Pattern\Internal.hs:107:5-33             580      64525    0.0    0.1     0.0    0.1
+ CAF:stateScores                                          AI.State.Internal         src\AI\State\Internal.hs:54:1-11                237          0    0.0    0.0     0.6    0.6
+  stateScores                                             AI.State.Internal         src\AI\State\Internal.hs:(54,1)-(55,65)         445          1    0.0    0.0     0.6    0.6
+   stateScores.\                                          AI.State.Internal         src\AI\State\Internal.hs:55:5-65                449       1497    0.0    0.0     0.6    0.6
+    placeCenterScore                                      AI.State.Internal         src\AI\State\Internal.hs:(58,1)-(63,8)          450       4127    0.0    0.0     0.6    0.6
+     placeCenterScore.(...)                               AI.State.Internal         src\AI\State\Internal.hs:62:5-29                457       4127    0.0    0.0     0.6    0.6
+      chessesJudge                                        AI.Pattern.Internal       src\AI\Pattern\Internal.hs:(70,1)-(73,35)       458       4127    0.0    0.0     0.6    0.6
+       chessesJudge.backward                              AI.Pattern.Internal       src\AI\Pattern\Internal.hs:72:5-40              562       4127    0.0    0.0     0.3    0.3
+        swapChessesJudgeSingle                            AI.Pattern.Internal       src\AI\Pattern\Internal.hs:(76,1)-(78,57)       563       4127    0.0    0.0     0.3    0.3
+         swapChessesJudgeSingle.ps                        AI.Pattern.Internal       src\AI\Pattern\Internal.hs:77:5-42              564       4127    0.0    0.0     0.3    0.3
+          swapC                                           AI.Pattern.Internal       src\AI\Pattern\Internal.hs:(81,1)-(83,11)       570      37143    0.0    0.0     0.0    0.0
+          chessesJudgeSingle                              AI.Pattern.Internal       src\AI\Pattern\Internal.hs:(90,1)-(92,72)       565       4127    0.0    0.0     0.3    0.3
+           chessesJudgeWithoutSplit                       AI.Pattern.Internal       src\AI\Pattern\Internal.hs:(95,1)-(101,56)      574     172047    0.1    0.1     0.2    0.3
+            chessesJudgeWithoutSplit.rs                   AI.Pattern.Internal       src\AI\Pattern\Internal.hs:98:5-32              575     106483    0.0    0.0     0.2    0.2
+             chessesJudgeWithoutSplit.f                   AI.Pattern.Internal       src\AI\Pattern\Internal.hs:97:5-59              589     163275    0.0    0.0     0.0    0.0
+             purePsPureSs                                 AI.Pattern.Internal       src\AI\Pattern\Internal.hs:(104,1)-(110,35)     576     106483    0.1    0.0     0.2    0.2
+              purePsPureSs.\                              AI.Pattern.Internal       src\AI\Pattern\Internal.hs:110:9-35             582     251545    0.0    0.1     0.0    0.1
+               purePsPureSs.\.\                           AI.Pattern.Internal       src\AI\Pattern\Internal.hs:110:29-35            586     353359    0.0    0.0     0.0    0.0
+              purePsPureSs.prefPs                         AI.Pattern.Internal       src\AI\Pattern\Internal.hs:107:5-33             580     106483    0.0    0.0     0.0    0.0
                psPatterns                                 AI.Pattern.Internal       src\AI\Pattern\Internal.hs:28:1-26              584          0    0.0    0.0     0.0    0.0
-                psTuple                                   AI.Pattern.Internal       src\AI\Pattern\Internal.hs:25:1-36              585     149021    0.0    0.0     0.0    0.0
-              purePsPureSs.prefs                          AI.Pattern.Internal       src\AI\Pattern\Internal.hs:106:5-26             577      64525    0.0    0.0     0.0    0.0
-               matchPrefix                                AI.Pattern.Internal       src\AI\Pattern\Internal.hs:227:1-45             578      64525    0.0    0.0     0.0    0.0
-                matchPrefixByTree                         AI.Pattern.Internal       src\AI\Pattern\Internal.hs:(210,1)-(217,14)     579     178156    0.0    0.0     0.0    0.0
-                 matchPrefixByTree.sub                    AI.Pattern.Internal       src\AI\Pattern\Internal.hs:(213,5)-(215,19)     587     113631    0.0    0.0     0.0    0.0
-                 matchPrefixByTree.subR                   AI.Pattern.Internal       src\AI\Pattern\Internal.hs:216:5-35             588     113631    0.0    0.0     0.0    0.0
-              purePsPureSs.suffs                          AI.Pattern.Internal       src\AI\Pattern\Internal.hs:108:5-51             581      64525    0.1    0.1     0.1    0.1
-               removePrefixByEndZero                      AI.Pattern.Internal       src\AI\Pattern\Internal.hs:(113,1)-(115,77)     583     201382    0.0    0.0     0.0    0.0
+                psTuple                                   AI.Pattern.Internal       src\AI\Pattern\Internal.hs:25:1-36              585     251545    0.0    0.0     0.0    0.0
+              purePsPureSs.prefs                          AI.Pattern.Internal       src\AI\Pattern\Internal.hs:106:5-26             577     106483    0.0    0.0     0.0    0.0
+               matchPrefix                                AI.Pattern.Internal       src\AI\Pattern\Internal.hs:227:1-45             578     106483    0.0    0.0     0.0    0.0
+                matchPrefixByTree                         AI.Pattern.Internal       src\AI\Pattern\Internal.hs:(210,1)-(217,14)     579     292464    0.0    0.0     0.0    0.0
+                 matchPrefixByTree.sub                    AI.Pattern.Internal       src\AI\Pattern\Internal.hs:(213,5)-(215,19)     587     185981    0.0    0.0     0.0    0.0
+                 matchPrefixByTree.subR                   AI.Pattern.Internal       src\AI\Pattern\Internal.hs:216:5-35             588     185981    0.0    0.0     0.0    0.0
+              purePsPureSs.suffs                          AI.Pattern.Internal       src\AI\Pattern\Internal.hs:108:5-51             581     106483    0.0    0.0     0.0    0.0
+               removePrefixByEndZero                      AI.Pattern.Internal       src\AI\Pattern\Internal.hs:(113,1)-(115,77)     583     354683    0.0    0.0     0.0    0.0
             psScore                                       AI.Pattern.Internal       src\AI\Pattern\Internal.hs:43:1-23              660          0    0.0    0.0     0.0    0.0
-             psTuple                                      AI.Pattern.Internal       src\AI\Pattern\Internal.hs:25:1-36              661     151821    0.0    0.0     0.0    0.0
-           chessesJudgeSingle.css                         AI.Pattern.Internal       src\AI\Pattern\Internal.hs:91:5-25              566       2694    0.0    0.0     0.0    0.0
-            splitChesses                                  AI.Pattern.Internal       src\AI\Pattern\Internal.hs:(161,1)-(166,43)     567       9045    0.0    0.0     0.0    0.0
-             splitChesses.(...)                           AI.Pattern.Internal       src\AI\Pattern\Internal.hs:165:5-27             573       6351    0.0    0.0     0.0    0.0
-             splitChesses.(...)                           AI.Pattern.Internal       src\AI\Pattern\Internal.hs:164:5-26             569       6351    0.0    0.0     0.0    0.0
-             splitChesses.l                               AI.Pattern.Internal       src\AI\Pattern\Internal.hs:164:5-26             568       6351    0.0    0.0     0.0    0.0
-             splitChesses.nr                              AI.Pattern.Internal       src\AI\Pattern\Internal.hs:165:5-27             571       6351    0.0    0.0     0.0    0.0
-             splitChesses.r                               AI.Pattern.Internal       src\AI\Pattern\Internal.hs:164:5-26             572       6351    0.0    0.0     0.0    0.0
+             psTuple                                      AI.Pattern.Internal       src\AI\Pattern\Internal.hs:25:1-36              661     268992    0.0    0.0     0.0    0.0
+           chessesJudgeSingle.css                         AI.Pattern.Internal       src\AI\Pattern\Internal.hs:91:5-25              566       4127    0.0    0.0     0.0    0.0
+            splitChesses                                  AI.Pattern.Internal       src\AI\Pattern\Internal.hs:(161,1)-(166,43)     567      14141    0.0    0.0     0.0    0.0
+             splitChesses.(...)                           AI.Pattern.Internal       src\AI\Pattern\Internal.hs:165:5-27             573      10014    0.0    0.0     0.0    0.0
+             splitChesses.(...)                           AI.Pattern.Internal       src\AI\Pattern\Internal.hs:164:5-26             569      10014    0.0    0.0     0.0    0.0
+             splitChesses.l                               AI.Pattern.Internal       src\AI\Pattern\Internal.hs:164:5-26             568      10014    0.0    0.0     0.0    0.0
+             splitChesses.nr                              AI.Pattern.Internal       src\AI\Pattern\Internal.hs:165:5-27             571      10014    0.0    0.0     0.0    0.0
+             splitChesses.r                               AI.Pattern.Internal       src\AI\Pattern\Internal.hs:164:5-26             572      10014    0.0    0.0     0.0    0.0
            psScore                                        AI.Pattern.Internal       src\AI\Pattern\Internal.hs:43:1-23              590          0    0.0    0.0     0.0    0.0
-            psTuple                                       AI.Pattern.Internal       src\AI\Pattern\Internal.hs:25:1-36              591      12254    0.0    0.0     0.0    0.0
-         mapPatterns                                      AI.Pattern.Internal       src\AI\Pattern\Internal.hs:46:1-61              712        961    0.0    0.0     0.0    0.0
-         mapScore                                         AI.Pattern.Internal       src\AI\Pattern\Internal.hs:49:1-58              713        961    0.0    0.0     0.0    0.0
-       chessesJudge.forward                               AI.Pattern.Internal       src\AI\Pattern\Internal.hs:71:5-35              460       2694    0.0    0.0     0.6    0.6
-        chessesJudgeSingle                                AI.Pattern.Internal       src\AI\Pattern\Internal.hs:(90,1)-(92,72)       461       2694    0.0    0.0     0.6    0.6
-         chessesJudgeWithoutSplit                         AI.Pattern.Internal       src\AI\Pattern\Internal.hs:(95,1)-(101,56)      473     100518    0.1    0.1     0.5    0.6
-          chessesJudgeWithoutSplit.rs                     AI.Pattern.Internal       src\AI\Pattern\Internal.hs:98:5-32              474      64976    0.0    0.0     0.4    0.5
-           chessesJudgeWithoutSplit.f                     AI.Pattern.Internal       src\AI\Pattern\Internal.hs:97:5-59              554      94866    0.0    0.0     0.0    0.0
-           purePsPureSs                                   AI.Pattern.Internal       src\AI\Pattern\Internal.hs:(104,1)-(110,35)     475      64976    0.1    0.1     0.3    0.4
-            purePsPureSs.\                                AI.Pattern.Internal       src\AI\Pattern\Internal.hs:110:9-35             498     150253    0.0    0.1     0.0    0.1
-             purePsPureSs.\.\                             AI.Pattern.Internal       src\AI\Pattern\Internal.hs:110:29-35            511     212536    0.0    0.0     0.0    0.0
-            purePsPureSs.prefPs                           AI.Pattern.Internal       src\AI\Pattern\Internal.hs:107:5-33             496      64976    0.0    0.1     0.0    0.1
+            psTuple                                       AI.Pattern.Internal       src\AI\Pattern\Internal.hs:25:1-36              591      17259    0.0    0.0     0.0    0.0
+         mapPatterns                                      AI.Pattern.Internal       src\AI\Pattern\Internal.hs:46:1-61              712       1682    0.0    0.0     0.0    0.0
+         mapScore                                         AI.Pattern.Internal       src\AI\Pattern\Internal.hs:49:1-58              713       1682    0.0    0.0     0.0    0.0
+       chessesJudge.forward                               AI.Pattern.Internal       src\AI\Pattern\Internal.hs:71:5-35              460       4127    0.0    0.0     0.3    0.3
+        chessesJudgeSingle                                AI.Pattern.Internal       src\AI\Pattern\Internal.hs:(90,1)-(92,72)       461       4127    0.0    0.0     0.3    0.3
+         chessesJudgeWithoutSplit                         AI.Pattern.Internal       src\AI\Pattern\Internal.hs:(95,1)-(101,56)      473     208010    0.1    0.1     0.3    0.3
+          chessesJudgeWithoutSplit.rs                     AI.Pattern.Internal       src\AI\Pattern\Internal.hs:98:5-32              474     126553    0.0    0.0     0.2    0.2
+           chessesJudgeWithoutSplit.f                     AI.Pattern.Internal       src\AI\Pattern\Internal.hs:97:5-59              554     199317    0.0    0.0     0.0    0.0
+           purePsPureSs                                   AI.Pattern.Internal       src\AI\Pattern\Internal.hs:(104,1)-(110,35)     475     126553    0.1    0.0     0.2    0.2
+            purePsPureSs.\                                AI.Pattern.Internal       src\AI\Pattern\Internal.hs:110:9-35             498     303187    0.0    0.1     0.0    0.1
+             purePsPureSs.\.\                             AI.Pattern.Internal       src\AI\Pattern\Internal.hs:110:29-35            511     422278    0.0    0.0     0.0    0.0
+            purePsPureSs.prefPs                           AI.Pattern.Internal       src\AI\Pattern\Internal.hs:107:5-33             496     126553    0.0    0.0     0.0    0.0
              psPatterns                                   AI.Pattern.Internal       src\AI\Pattern\Internal.hs:28:1-26              501          0    0.0    0.0     0.0    0.0
-              psTuple                                     AI.Pattern.Internal       src\AI\Pattern\Internal.hs:25:1-36              502     150253    0.0    0.0     0.0    0.0
-            purePsPureSs.prefs                            AI.Pattern.Internal       src\AI\Pattern\Internal.hs:106:5-26             476      64976    0.0    0.0     0.1    0.0
-             matchPrefix                                  AI.Pattern.Internal       src\AI\Pattern\Internal.hs:227:1-45             477      64976    0.0    0.0     0.1    0.0
-              matchPrefixByTree                           AI.Pattern.Internal       src\AI\Pattern\Internal.hs:(210,1)-(217,14)     478     179687    0.0    0.0     0.1    0.0
-               matchPrefixByTree.sub                      AI.Pattern.Internal       src\AI\Pattern\Internal.hs:(213,5)-(215,19)     514     114711    0.0    0.0     0.0    0.0
-               matchPrefixByTree.subR                     AI.Pattern.Internal       src\AI\Pattern\Internal.hs:216:5-35             532     114711    0.0    0.0     0.0    0.0
-            purePsPureSs.suffs                            AI.Pattern.Internal       src\AI\Pattern\Internal.hs:108:5-51             497      64976    0.1    0.1     0.1    0.1
-             removePrefixByEndZero                        AI.Pattern.Internal       src\AI\Pattern\Internal.hs:(113,1)-(115,77)     499     204514    0.0    0.0     0.0    0.0
+              psTuple                                     AI.Pattern.Internal       src\AI\Pattern\Internal.hs:25:1-36              502     303187    0.0    0.0     0.0    0.0
+            purePsPureSs.prefs                            AI.Pattern.Internal       src\AI\Pattern\Internal.hs:106:5-26             476     126553    0.0    0.0     0.0    0.0
+             matchPrefix                                  AI.Pattern.Internal       src\AI\Pattern\Internal.hs:227:1-45             477     126553    0.0    0.0     0.0    0.0
+              matchPrefixByTree                           AI.Pattern.Internal       src\AI\Pattern\Internal.hs:(210,1)-(217,14)     478     348283    0.0    0.0     0.0    0.0
+               matchPrefixByTree.sub                      AI.Pattern.Internal       src\AI\Pattern\Internal.hs:(213,5)-(215,19)     514     221730    0.0    0.0     0.0    0.0
+               matchPrefixByTree.subR                     AI.Pattern.Internal       src\AI\Pattern\Internal.hs:216:5-35             532     221730    0.0    0.0     0.0    0.0
+            purePsPureSs.suffs                            AI.Pattern.Internal       src\AI\Pattern\Internal.hs:108:5-51             497     126553    0.0    0.0     0.0    0.1
+             removePrefixByEndZero                        AI.Pattern.Internal       src\AI\Pattern\Internal.hs:(113,1)-(115,77)     499     440314    0.0    0.0     0.0    0.0
           psScore                                         AI.Pattern.Internal       src\AI\Pattern\Internal.hs:43:1-23              558          0    0.0    0.0     0.0    0.0
-           psTuple                                        AI.Pattern.Internal       src\AI\Pattern\Internal.hs:25:1-36              559     152911    0.0    0.0     0.0    0.0
-         chessesJudgeSingle.css                           AI.Pattern.Internal       src\AI\Pattern\Internal.hs:91:5-25              462       2694    0.0    0.0     0.0    0.0
-          splitChesses                                    AI.Pattern.Internal       src\AI\Pattern\Internal.hs:(161,1)-(166,43)     463       9112    0.0    0.0     0.0    0.0
-           splitChesses.(...)                             AI.Pattern.Internal       src\AI\Pattern\Internal.hs:165:5-27             472       6418    0.0    0.0     0.0    0.0
-           splitChesses.(...)                             AI.Pattern.Internal       src\AI\Pattern\Internal.hs:164:5-26             465       6418    0.0    0.0     0.0    0.0
-           splitChesses.l                                 AI.Pattern.Internal       src\AI\Pattern\Internal.hs:164:5-26             464       6418    0.0    0.0     0.0    0.0
-           splitChesses.nr                                AI.Pattern.Internal       src\AI\Pattern\Internal.hs:165:5-27             470       6418    0.0    0.0     0.0    0.0
-           splitChesses.r                                 AI.Pattern.Internal       src\AI\Pattern\Internal.hs:164:5-26             471       6418    0.0    0.0     0.0    0.0
+           psTuple                                        AI.Pattern.Internal       src\AI\Pattern\Internal.hs:25:1-36              559     335165    0.0    0.0     0.0    0.0
+         chessesJudgeSingle.css                           AI.Pattern.Internal       src\AI\Pattern\Internal.hs:91:5-25              462       4127    0.0    0.0     0.0    0.0
+          splitChesses                                    AI.Pattern.Internal       src\AI\Pattern\Internal.hs:(161,1)-(166,43)     463      13999    0.0    0.0     0.0    0.0
+           splitChesses.(...)                             AI.Pattern.Internal       src\AI\Pattern\Internal.hs:165:5-27             472       9872    0.0    0.0     0.0    0.0
+           splitChesses.(...)                             AI.Pattern.Internal       src\AI\Pattern\Internal.hs:164:5-26             465       9872    0.0    0.0     0.0    0.0
+           splitChesses.l                                 AI.Pattern.Internal       src\AI\Pattern\Internal.hs:164:5-26             464       9872    0.0    0.0     0.0    0.0
+           splitChesses.nr                                AI.Pattern.Internal       src\AI\Pattern\Internal.hs:165:5-27             470       9872    0.0    0.0     0.0    0.0
+           splitChesses.r                                 AI.Pattern.Internal       src\AI\Pattern\Internal.hs:164:5-26             471       9872    0.0    0.0     0.0    0.0
          psScore                                          AI.Pattern.Internal       src\AI\Pattern\Internal.hs:43:1-23              560          0    0.0    0.0     0.0    0.0
-          psTuple                                         AI.Pattern.Internal       src\AI\Pattern\Internal.hs:25:1-36              561      12274    0.0    0.0     0.0    0.0
-       foldPS                                             AI.Pattern.Internal       src\AI\Pattern\Internal.hs:(86,1)-(87,60)       459       2694    0.0    0.0     0.0    0.0
-        foldPS.step                                       AI.Pattern.Internal       src\AI\Pattern\Internal.hs:87:5-60              711       2015    0.0    0.0     0.0    0.0
-     placeCenterScore.(...)                               AI.State.Internal         src\AI\State\Internal.hs:60:5-35                454       2694    0.0    0.0     0.0    0.0
-     placeCenterScore.half                                AI.State.Internal         src\AI\State\Internal.hs:59:5-29                451       2694    0.0    0.0     0.0    0.0
-     placeCenterScore.left                                AI.State.Internal         src\AI\State\Internal.hs:60:5-35                456       2694    0.0    0.0     0.0    0.0
-     placeCenterScore.nc                                  AI.State.Internal         src\AI\State\Internal.hs:61:5-29                455       2694    0.0    0.0     0.0    0.0
-     placeCenterScore.right                               AI.State.Internal         src\AI\State\Internal.hs:60:5-35                513       2694    0.0    0.0     0.0    0.0
-     placeCenterScore.s                                   AI.State.Internal         src\AI\State\Internal.hs:62:5-29                592       2694    0.0    0.0     0.0    0.0
-    fromState                                             AI.State.Internal         src\AI\State\Internal.hs:35:1-46                452       1038    0.0    0.0     0.0    0.0
-     fromState_                                           AI.State.Internal         src\AI\State\Internal.hs:(26,1)-(29,39)         453       9342    0.0    0.0     0.0    0.0
-      fromState_.(...)                                    AI.State.Internal         src\AI\State\Internal.hs:28:5-36                467       8304    0.0    0.0     0.0    0.0
-       toInt                                              AI.State.Internal         src\AI\State\Internal.hs:16:1-16                468       8304    0.0    0.0     0.0    0.0
-      fromState_.c                                        AI.State.Internal         src\AI\State\Internal.hs:28:5-36                466       8304    0.0    0.0     0.0    0.0
-      fromState_.ns                                       AI.State.Internal         src\AI\State\Internal.hs:28:5-36                469       7266    0.0    0.0     0.0    0.0
+          psTuple                                         AI.Pattern.Internal       src\AI\Pattern\Internal.hs:25:1-36              561      17231    0.0    0.0     0.0    0.0
+       foldPS                                             AI.Pattern.Internal       src\AI\Pattern\Internal.hs:(86,1)-(87,60)       459       4127    0.0    0.0     0.0    0.0
+        foldPS.step                                       AI.Pattern.Internal       src\AI\Pattern\Internal.hs:87:5-60              711       3445    0.0    0.0     0.0    0.0
+     placeCenterScore.(...)                               AI.State.Internal         src\AI\State\Internal.hs:60:5-35                454       4127    0.0    0.0     0.0    0.0
+     placeCenterScore.half                                AI.State.Internal         src\AI\State\Internal.hs:59:5-29                451       4127    0.0    0.0     0.0    0.0
+     placeCenterScore.left                                AI.State.Internal         src\AI\State\Internal.hs:60:5-35                456       4127    0.0    0.0     0.0    0.0
+     placeCenterScore.nc                                  AI.State.Internal         src\AI\State\Internal.hs:61:5-29                455       4127    0.0    0.0     0.0    0.0
+     placeCenterScore.right                               AI.State.Internal         src\AI\State\Internal.hs:60:5-35                513       4127    0.0    0.0     0.0    0.0
+     placeCenterScore.s                                   AI.State.Internal         src\AI\State\Internal.hs:62:5-29                592       4127    0.0    0.0     0.0    0.0
+    fromState                                             AI.State.Internal         src\AI\State\Internal.hs:35:1-46                452       1497    0.0    0.0     0.0    0.0
+     fromState_                                           AI.State.Internal         src\AI\State\Internal.hs:(26,1)-(29,39)         453      13473    0.0    0.0     0.0    0.0
+      fromState_.(...)                                    AI.State.Internal         src\AI\State\Internal.hs:28:5-36                467      11976    0.0    0.0     0.0    0.0
+       toInt                                              AI.State.Internal         src\AI\State\Internal.hs:16:1-16                468      11976    0.0    0.0     0.0    0.0
+      fromState_.c                                        AI.State.Internal         src\AI\State\Internal.hs:28:5-36                466      11976    0.0    0.0     0.0    0.0
+      fromState_.ns                                       AI.State.Internal         src\AI\State\Internal.hs:28:5-36                469      10479    0.0    0.0     0.0    0.0
  CAF:stateScoresArray                                     AI.State.Internal         src\AI\State\Internal.hs:67:1-16                238          0    0.0    0.0     0.0    0.0
   stateScoresArray                                        AI.State.Internal         src\AI\State\Internal.hs:67:1-64                444          1    0.0    0.0     0.0    0.0
  CAF:stateSeq                                             AI.State.Board.Dir        src\AI\State\Board\Dir.hs:17:1-8                303          0    0.0    0.0     0.0    0.0

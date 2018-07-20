@@ -9,14 +9,14 @@ import Board
 import AI.State.Board
 import AI.State.Board.Vector
 
-search :: BoardState -> Int -> (Int, Int) -> Pos
-search boardState chessOrigin (m, n) = resultPos where
-    all = searchSub boardState chessOrigin (Nothing, Nothing) m
+search :: BoardState -> Int -> (Int, Int, Float) -> Pos
+search boardState chessOrigin (originM, originN, decreaseCoefficient) = resultPos where
+    all = searchSub boardState chessOrigin (Nothing, Nothing) originM
     (_, (resultPos, _):_) = all
     searchSub :: BoardState -> Int -> (Maybe Int, Maybe Int) -> Int -> (Int, [(Pos, Int)])
     searchSub bs _ _ 0 = (score bs, [])
     searchSub boardState chess (alpha, beta) m = r where
-        searchedPoses = chessBest boardState chess n
+        searchedPoses = chessBest boardState chess (max (floor (realToFrac originN - (realToFrac (originM - m) * decreaseCoefficient))) 1)
         scanResult = scanl step ((alpha, beta), Nothing, False) $ assert (not (null searchedPoses)) searchedPoses
         stop (_, _, x) = not x
         stoped = dropWhile stop scanResult

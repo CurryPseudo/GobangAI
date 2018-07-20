@@ -84,7 +84,7 @@ update bs@(BS sc sts choices) pe@(p, e) = let
 
 locationScore :: Size -> Pos -> Int
 locationScore (w, h) (x, y) = let
-    score m n = min m (n - 1 - m)
+    score m n = 10 * min m (n - 1 - m)
     in score x w + score y h
 
 chessRltSign :: Int -> Int -> Int

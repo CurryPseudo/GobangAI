@@ -24,3 +24,12 @@ instance Show PosScore where
 
 updateSortedList :: PosScore -> [PosScore] -> [PosScore]
 updateSortedList ps pss = insert ps (delete ps pss)
+    --binaryInsert [y] x = if x >= y
+    --                     then [y, x]
+    --                     else [x, y]
+    --binaryInsert xs x = r where
+    --    (left, right) = splitAt (length xs `quot` 2) xs
+    --    r = if head right > x
+    --        then binaryInsert left x ++ right
+    --        else left ++ binaryInsert right x
+
